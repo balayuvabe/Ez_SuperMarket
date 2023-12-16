@@ -1,6 +1,6 @@
-## Ez-Supemarket
+## Ez-Supermarket
 
-Supermarket Model
+Super Market
 
 #### License
 

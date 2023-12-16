@@ -1,7 +1,7 @@
 app_name = "ez_supermarket"
-app_title = "Ez-Supemarket"
+app_title = "Ez-Supermarket"
 app_publisher = "Balamurugan"
-app_description = "Supermarket Model"
+app_description = "Super Market"
 app_email = "balamurugan@yuvabe.com"
 app_license = "mit"
 # required_apps = []

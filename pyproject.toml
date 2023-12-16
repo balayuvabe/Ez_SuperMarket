@@ -3,7 +3,7 @@ name = "ez_supermarket"
 authors = [
     { name = "Balamurugan", email = "balamurugan@yuvabe.com"}
 ]
-description = "Supermarket Model"
+description = "Super Market"
 requires-python = ">=3.10"
 readme = "README.md"
 dynamic = ["version"]
