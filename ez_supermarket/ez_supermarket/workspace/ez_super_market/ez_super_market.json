@@ -1,0 +1,134 @@
+{
+ "charts": [],
+ "content": "[{\"id\":\"tQCbI9ooNT\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Ez Super Market</span>\",\"col\":12}},{\"id\":\"bnyI6g50k_\",\"type\":\"card\",\"data\":{\"card_name\":\"Quick Update\",\"col\":4}},{\"id\":\"FqZ6x5pIH_\",\"type\":\"card\",\"data\":{\"card_name\":\"Stock\",\"col\":4}},{\"id\":\"HiRQ2N5JPB\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"JQGvPPORGF\",\"type\":\"card\",\"data\":{\"card_name\":\"Warehouse Management\",\"col\":4}}]",
+ "creation": "2023-12-18 19:16:55.631944",
+ "custom_blocks": [],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "retail",
+ "idx": 0,
+ "indicator_color": "green",
+ "is_hidden": 0,
+ "label": "Ez Super Market",
+ "links": [
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Warehouse Management",
+   "link_count": 4,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Warehouse",
+   "link_count": 0,
+   "link_to": "Warehouse",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "CEBA WMS Settings",
+   "link_count": 0,
+   "link_to": "CEBA WMS Settings",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "CEBA WMS Storage Location",
+   "link_count": 0,
+   "link_to": "CEBA WMS Storage Location",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Warehouse Type",
+   "link_count": 0,
+   "link_to": "Warehouse Type",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Quick Update",
+   "link_count": 2,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Create A New Item",
+   "link_count": 0,
+   "link_to": "New Product",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Update Price",
+   "link_count": 0,
+   "link_to": "Item Price",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Stock",
+   "link_count": 2,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Stock In",
+   "link_count": 0,
+   "link_to": "Stock In",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Adjust Stock",
+   "link_count": 0,
+   "link_to": "Stock Adjust",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  }
+ ],
+ "modified": "2023-12-18 20:33:16.877059",
+ "modified_by": "Administrator",
+ "module": "Ez-Supermarket",
+ "name": "Ez Super Market",
+ "number_cards": [],
+ "owner": "Administrator",
+ "parent_page": "",
+ "public": 1,
+ "quick_lists": [],
+ "roles": [],
+ "sequence_id": 2.0,
+ "shortcuts": [],
+ "title": "Ez Super Market"
+}

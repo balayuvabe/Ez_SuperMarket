@@ -1,0 +1,87 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:{location_name}{index_id}",
+ "creation": "2023-11-29 10:47:05.810666",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "location_name",
+  "column_break_dirca",
+  "index_id",
+  "section_break_xpjvg",
+  "specific_items",
+  "section_break_wz7vz",
+  "items"
+ ],
+ "fields": [
+  {
+   "fieldname": "location_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Location Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_dirca",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "index_id",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Index ID",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_xpjvg",
+   "fieldtype": "Section Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "specific_items",
+   "fieldtype": "Check",
+   "label": "Specific Items"
+  },
+  {
+   "fieldname": "section_break_wz7vz",
+   "fieldtype": "Section Break"
+  },
+  {
+   "depends_on": "specific_items",
+   "fieldname": "items",
+   "fieldtype": "Table",
+   "label": "Items",
+   "mandatory_depends_on": "specific_items",
+   "options": "CEBA WMS Storage Location Item"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2023-12-18 19:24:13.304684",
+ "modified_by": "Administrator",
+ "module": "Ez-Supermarket",
+ "name": "CEBA WMS Storage Location",
+ "naming_rule": "Expression (old style)",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
