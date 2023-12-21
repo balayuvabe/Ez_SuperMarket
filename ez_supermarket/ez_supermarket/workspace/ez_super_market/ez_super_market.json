@@ -1,6 +1,11 @@
 {
- "charts": [],
- "content": "[{\"id\":\"tQCbI9ooNT\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Ez Super Market</span>\",\"col\":12}},{\"id\":\"bnyI6g50k_\",\"type\":\"card\",\"data\":{\"card_name\":\"Quick Update\",\"col\":4}},{\"id\":\"FqZ6x5pIH_\",\"type\":\"card\",\"data\":{\"card_name\":\"Stock\",\"col\":4}},{\"id\":\"HiRQ2N5JPB\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"JQGvPPORGF\",\"type\":\"card\",\"data\":{\"card_name\":\"Warehouse Management\",\"col\":4}}]",
+ "charts": [
+  {
+   "chart_name": "Items Sold",
+   "label": "Items Sold"
+  }
+ ],
+ "content": "[{\"id\":\"tQCbI9ooNT\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Ez Super Market</span>\",\"col\":12}},{\"id\":\"bnyI6g50k_\",\"type\":\"card\",\"data\":{\"card_name\":\"Quick Update\",\"col\":4}},{\"id\":\"FqZ6x5pIH_\",\"type\":\"card\",\"data\":{\"card_name\":\"Stock\",\"col\":4}},{\"id\":\"RQ0r4IMHsF\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Remove Expired Items\",\"col\":3}},{\"id\":\"HiRQ2N5JPB\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"JQGvPPORGF\",\"type\":\"card\",\"data\":{\"card_name\":\"Warehouse Management\",\"col\":4}},{\"id\":\"1irGRP9_BO\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Items Sold\",\"col\":12}}]",
  "creation": "2023-12-18 19:16:55.631944",
  "custom_blocks": [],
  "docstatus": 0,
@@ -93,9 +98,19 @@
    "hidden": 0,
    "is_query_report": 0,
    "label": "Stock",
-   "link_count": 2,
+   "link_count": 3,
    "onboard": 0,
    "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Casa Request",
+   "link_count": 0,
+   "link_to": "Casa Request",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
   },
   {
    "hidden": 0,
@@ -118,7 +133,7 @@
    "type": "Link"
   }
  ],
- "modified": "2023-12-18 20:33:16.877059",
+ "modified": "2023-12-20 16:02:06.088115",
  "modified_by": "Administrator",
  "module": "Ez-Supermarket",
  "name": "Ez Super Market",
@@ -129,6 +144,15 @@
  "quick_lists": [],
  "roles": [],
  "sequence_id": 2.0,
- "shortcuts": [],
+ "shortcuts": [
+  {
+   "color": "Red",
+   "doc_view": "List",
+   "label": "Remove Expired Items",
+   "link_to": "Stock Entry",
+   "stats_filter": "[[\"Stock Entry\",\"purpose\",\"=\",\"Material Issue\",false],[\"Stock Entry\",\"stock_entry_type\",\"=\",\"Material Issue\",false]]",
+   "type": "DocType"
+  }
+ ],
  "title": "Ez Super Market"
 }

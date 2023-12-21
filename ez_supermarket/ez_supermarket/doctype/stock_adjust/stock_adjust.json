@@ -1,7 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "naming_series:",
+ "autoname": "format: STKA-.DD.-.MM.-.YY.-.###",
  "creation": "2023-10-25 15:18:47.261830",
  "default_view": "List",
  "doctype": "DocType",
@@ -11,6 +11,7 @@
   "supplier_section",
   "naming_series",
   "reason",
+  "customer_name",
   "company",
   "column_break_7",
   "posting_date",
@@ -44,9 +45,10 @@
   },
   {
    "fieldname": "reason",
-   "fieldtype": "Data",
+   "fieldtype": "Select",
    "in_list_view": 1,
    "label": "Reason",
+   "options": "\nSold\nStolen Goods\nDamaged Goods\nWritten off\nStock Miscount\nExpired",
    "reqd": 1
   },
   {
@@ -171,16 +173,23 @@
    "options": "Stock Adjust",
    "print_hide": 1,
    "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.reason === \"Sold\"",
+   "fieldname": "customer_name",
+   "fieldtype": "Link",
+   "label": "Customer Name",
+   "options": "Customer"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2023-12-19 11:35:55.914781",
+ "modified": "2023-12-19 15:42:50.348204",
  "modified_by": "Administrator",
  "module": "Ez-Supermarket",
  "name": "Stock Adjust",
- "naming_rule": "By \"Naming Series\" field",
+ "naming_rule": "Expression",
  "owner": "Administrator",
  "permissions": [
   {
