@@ -1,0 +1,114 @@
+[
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2023-08-31 10:41:44.879458",
+  "name": "Approve",
+  "workflow_action_name": "Approve"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2023-08-31 10:41:44.881719",
+  "name": "Reject",
+  "workflow_action_name": "Reject"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2023-08-31 10:41:44.884093",
+  "name": "Review",
+  "workflow_action_name": "Review"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2023-08-31 15:07:28.708735",
+  "name": "cook",
+  "workflow_action_name": "cook"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2023-08-31 15:07:28.818763",
+  "name": "Send to Kitchen",
+  "workflow_action_name": "Send to Kitchen"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2023-08-31 15:07:28.827695",
+  "name": "Send to Preparation",
+  "workflow_action_name": "Send to Preparation"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2023-08-31 15:07:28.836149",
+  "name": "Taken",
+  "workflow_action_name": "Taken"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2023-08-31 15:07:28.844236",
+  "name": "Completed",
+  "workflow_action_name": "Completed"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2023-08-31 15:07:28.863051",
+  "name": "Stock Not Available",
+  "workflow_action_name": "Stock Not Available"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2023-08-31 15:07:28.873114",
+  "name": "Stock Available",
+  "workflow_action_name": "Stock Available"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2023-08-31 15:07:28.882028",
+  "name": "Check For Stock",
+  "workflow_action_name": "Check For Stock"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2023-08-31 15:07:28.889923",
+  "name": "Send For Approval",
+  "workflow_action_name": "Send For Approval"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2023-08-31 15:07:28.853222",
+  "name": "Accept Order",
+  "workflow_action_name": "Accept Order"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2023-11-27 11:41:59.936516",
+  "name": "Send For Price Updation",
+  "workflow_action_name": "Send For Price Updation"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2023-11-27 11:42:46.981733",
+  "name": "Price Updated",
+  "workflow_action_name": "Price Updated"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2023-12-27 15:02:58.432695",
+  "name": "Send the Order",
+  "workflow_action_name": "Send the Order"
+ }
+]
