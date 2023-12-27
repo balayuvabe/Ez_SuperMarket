@@ -28,7 +28,10 @@ app_license = "mit"
 # page_js = {"page" : "public/js/file.js"}
 
 # include js in doctype views
-doctype_js = {"Material Request" : "ez_supermarket/custom/material_request/material_request.js"}
+doctype_js = {
+    "Material Request" : "ez_supermarket/custom/material_request/material_request.js",
+    "Purchase Order" : "ez_supermarket/custom/purchase_order/purchase_order.js",
+    "Item" : "ez_supermarket/custom/item/item.js",}
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
 # doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
@@ -228,5 +231,7 @@ doctype_js = {"Material Request" : "ez_supermarket/custom/material_request/mater
 # }
 
 fixtures = [
-    {"dt": "Custom Field", "filters": [["module", "=", "Ez_Supermarket"]]},
+    "Workflow State", "Workflow Action Master",
+    {"dt": "Workflow", "filters": [["name", "=", "Purchase & Price Update"]]},
+    {"dt": "Custom Field", "filters": [["module", "=", "Ez-Supermarket"]]},
 ]

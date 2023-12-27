@@ -1,11 +1,11 @@
 {
  "charts": [
   {
-   "chart_name": "Items Sold",
-   "label": "Items Sold"
+   "chart_name": "Stall Refill",
+   "label": "Stall Refill"
   }
  ],
- "content": "[{\"id\":\"tQCbI9ooNT\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Ez Super Market</span>\",\"col\":12}},{\"id\":\"bnyI6g50k_\",\"type\":\"card\",\"data\":{\"card_name\":\"Quick Update\",\"col\":4}},{\"id\":\"FqZ6x5pIH_\",\"type\":\"card\",\"data\":{\"card_name\":\"Stock\",\"col\":4}},{\"id\":\"RQ0r4IMHsF\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Remove Expired Items\",\"col\":3}},{\"id\":\"HiRQ2N5JPB\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"JQGvPPORGF\",\"type\":\"card\",\"data\":{\"card_name\":\"Warehouse Management\",\"col\":4}},{\"id\":\"1irGRP9_BO\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Items Sold\",\"col\":12}}]",
+ "content": "[{\"id\":\"tQCbI9ooNT\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Ez Super Market</span>\",\"col\":12}},{\"id\":\"bnyI6g50k_\",\"type\":\"card\",\"data\":{\"card_name\":\"Quick Update\",\"col\":4}},{\"id\":\"FqZ6x5pIH_\",\"type\":\"card\",\"data\":{\"card_name\":\"Stock\",\"col\":4}},{\"id\":\"RQ0r4IMHsF\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Remove Expired Items\",\"col\":3}},{\"id\":\"HiRQ2N5JPB\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"JQGvPPORGF\",\"type\":\"card\",\"data\":{\"card_name\":\"Warehouse Management\",\"col\":4}},{\"id\":\"oeMoH8uBlA\",\"type\":\"card\",\"data\":{\"card_name\":\"Purchase\",\"col\":4}},{\"id\":\"T5AEiJnYAt\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Stall Refill\",\"col\":12}}]",
  "creation": "2023-12-18 19:16:55.631944",
  "custom_blocks": [],
  "docstatus": 0,
@@ -98,7 +98,7 @@
    "hidden": 0,
    "is_query_report": 0,
    "label": "Stock",
-   "link_count": 3,
+   "link_count": 2,
    "onboard": 0,
    "type": "Card Break"
   },
@@ -115,9 +115,9 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "Stock In",
+   "label": "Adjust Stock",
    "link_count": 0,
-   "link_to": "Stock In",
+   "link_to": "Stock Adjust",
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
@@ -125,15 +125,43 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "Adjust Stock",
+   "label": "Purchase",
+   "link_count": 3,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Purchase Order",
    "link_count": 0,
-   "link_to": "Stock Adjust",
+   "link_to": "Purchase Order",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Purchase Invoice",
+   "link_count": 0,
+   "link_to": "Purchase Invoice",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Purchase Receipt",
+   "link_count": 0,
+   "link_to": "Purchase Receipt",
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
   }
  ],
- "modified": "2023-12-20 16:02:06.088115",
+ "modified": "2023-12-27 12:21:43.857092",
  "modified_by": "Administrator",
  "module": "Ez-Supermarket",
  "name": "Ez Super Market",
