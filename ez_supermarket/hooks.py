@@ -31,6 +31,7 @@ app_license = "mit"
 doctype_js = {
     "Material Request" : "ez_supermarket/custom/material_request/material_request.js",
     "Purchase Order" : "ez_supermarket/custom/purchase_order/purchase_order.js",
+    "Purchase Invoice" : "ez_supermarket/custom/purchase_invoice/purchase_invoice.js",
     "Item" : "ez_supermarket/custom/item/item.js",}
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
