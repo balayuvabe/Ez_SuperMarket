@@ -41,23 +41,6 @@ frappe.ui.form.on("Purchase Order", {
     });
   },
 });
-//     if (
-//       frappe.user.has_role("PTPS_EXECUTIVE_1") ||
-//       frappe.user.has_role("PTPS_EXECUTIVE_2")
-//     ) {
-//       if (frm.doc.docstatus === 0 && frm.doc.workflow_state == "Update Price") {
-//         // "Draft" state
-//         // Show the "custom_suppliers_bill_no" field
-//         frm.toggle_display("custom_suppliers_bill_no", true);
-//         frm.set_df_property("custom_suppliers_bill_no", "reqd", true);
-//       } else {
-//         // Hide the "custom_suppliers_bill_no" field and make it not mandatory
-//         frm.toggle_display("custom_suppliers_bill_no", false);
-//         frm.set_df_property("custom_suppliers_bill_no", "reqd", false);
-//       }
-//     }
-//   },
-// });
 function checkPrices(frm) {
   var items = frm.doc.items || [];
   var rows = [];
