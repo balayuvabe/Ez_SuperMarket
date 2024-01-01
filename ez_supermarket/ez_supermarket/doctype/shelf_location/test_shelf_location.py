@@ -5,5 +5,5 @@
 from frappe.tests.utils import FrappeTestCase
 
 
-class TestCEBAWMSStorageLocation(FrappeTestCase):
+class TestShelfLocation(FrappeTestCase):
 	pass

@@ -51,7 +51,7 @@
    "is_query_report": 0,
    "label": "CEBA WMS Storage Location",
    "link_count": 0,
-   "link_to": "CEBA WMS Storage Location",
+   "link_to": "Shelf Location",
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
@@ -62,34 +62,6 @@
    "label": "Warehouse Type",
    "link_count": 0,
    "link_to": "Warehouse Type",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Quick Update",
-   "link_count": 2,
-   "onboard": 0,
-   "type": "Card Break"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Create A New Item",
-   "link_count": 0,
-   "link_to": "New Product",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Update Price",
-   "link_count": 0,
-   "link_to": "Item Price",
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
@@ -159,9 +131,37 @@
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Quick Update",
+   "link_count": 2,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Item List",
+   "link_count": 0,
+   "link_to": "Item",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Update Price",
+   "link_count": 0,
+   "link_to": "Item Price",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
   }
  ],
- "modified": "2023-12-27 12:21:43.857092",
+ "modified": "2023-12-30 16:22:36.078136",
  "modified_by": "Administrator",
  "module": "Ez-Supermarket",
  "name": "Ez Super Market",

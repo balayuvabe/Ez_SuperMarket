@@ -1,7 +1,7 @@
 // Copyright (c) 2023, Balamurugan and contributors
 // For license information, please see license.txt
 
-frappe.ui.form.on("CEBA WMS Storage Location", {
+frappe.ui.form.on("Shelf Location", {
   location_name: function (frm) {
     const location_name = frm.doc.location_name;
 

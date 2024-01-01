@@ -1,67 +1,45 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "format:{warehouse}--{start_date}--{####}",
- "creation": "2023-11-29 10:25:44.354511",
- "default_view": "List",
+ "autoname": "format:{location_id}",
+ "creation": "2023-12-29 18:23:01.420262",
  "doctype": "DocType",
- "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
   "warehouse",
-  "start_date",
-  "end_date",
-  "section_break_cs80a",
-  "locations",
+  "location_id",
   "amended_from"
  ],
  "fields": [
   {
    "fieldname": "warehouse",
    "fieldtype": "Link",
-   "in_list_view": 1,
    "label": "Warehouse",
-   "options": "Warehouse",
-   "reqd": 1
+   "options": "Warehouse"
   },
   {
-   "fieldname": "section_break_cs80a",
-   "fieldtype": "Section Break"
-  },
-  {
-   "fieldname": "locations",
-   "fieldtype": "Table",
-   "label": "Locations",
-   "options": "CEBA WMS Settings Storage Location",
-   "reqd": 1
+   "fieldname": "location_id",
+   "fieldtype": "Data",
+   "label": "Location ID"
   },
   {
    "fieldname": "amended_from",
    "fieldtype": "Link",
    "label": "Amended From",
    "no_copy": 1,
-   "options": "CEBA WMS Settings",
+   "options": "Article Location",
    "print_hide": 1,
-   "read_only": 1
-  },
-  {
-   "fieldname": "start_date",
-   "fieldtype": "Date",
-   "label": "Start Date"
-  },
-  {
-   "fieldname": "end_date",
-   "fieldtype": "Date",
-   "label": "End Date"
+   "read_only": 1,
+   "search_index": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2023-12-29 15:35:26.095551",
+ "modified": "2024-01-01 18:14:49.177354",
  "modified_by": "Administrator",
  "module": "Ez-Supermarket",
- "name": "CEBA WMS Settings",
+ "name": "Article Location",
  "naming_rule": "Expression",
  "owner": "Administrator",
  "permissions": [
@@ -75,6 +53,7 @@
    "report": 1,
    "role": "System Manager",
    "share": 1,
+   "submit": 1,
    "write": 1
   }
  ],

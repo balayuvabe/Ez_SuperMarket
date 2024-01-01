@@ -5,7 +5,7 @@ import frappe
 from frappe.model.document import Document
 from frappe.utils import nowdate
 
-class CEBAWMSStorageLocation(Document):
+class ShelfLocation(Document):
 	pass
 
 @frappe.whitelist()

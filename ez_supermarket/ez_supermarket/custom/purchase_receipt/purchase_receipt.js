@@ -1,7 +1,7 @@
 // Copyright (c) 2023, Balamurugan and contributors
 // For license information, please see license.txt
 
-frappe.ui.form.on("Purchase Invoice", {
+frappe.ui.form.on("Purchase Receipt", {
   refresh: function (frm) {
     if (
       frappe.user.has_role("PTPS_EXECUTIVE_1") ||
@@ -16,6 +16,28 @@ frappe.ui.form.on("Purchase Invoice", {
       );
     }
   },
+  // before_submit: function (frm) {
+  //   frappe.call({
+  //     method:
+  //       "ez_supermarket.ez_supermarket.custom.purchase_receipt.purchase_receipt.before_submit",
+  //     args: { doc: frm.doc },
+  //     callback: function (r) {
+  //       frappe.msgprint(__("Batches have been created."));
+  //     },
+  //   });
+  // },
+  // validate: function (frm) {
+  //   // Iterate through each item in the document
+  //   $.each(frm.doc.items || [], function (i, item) {
+  //     // Set "serial_and_batch_bundle" equal to "batch_no"
+  //     frappe.model.set_value(
+  //       item.doctype,
+  //       item.name,
+  //       "serial_and_batch_bundle",
+  //       item.batch_no
+  //     );
+  //   });
+  // },
 });
 
 function showItemDialog(frm) {
@@ -198,7 +220,7 @@ function calculateSellingPrice(dialog) {
   dialog.set_value("discount_percentage", discount_percentage);
 }
 
-frappe.ui.form.on("Purchase Invoice Item", {
+frappe.ui.form.on("Purchase Receipt Item", {
   custom_margin: function (frm, cdt, cdn) {
     var row = locals[cdt][cdn];
     calSellingPrice(row);

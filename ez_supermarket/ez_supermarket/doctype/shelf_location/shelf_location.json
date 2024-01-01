@@ -1,16 +1,19 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "format:{location_name}{index_id}",
+ "autoname": "format:{location_id}",
  "creation": "2023-11-29 10:47:05.810666",
  "default_view": "List",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
+  "general_details_section",
+  "warehouse",
   "location_name",
   "column_break_dirca",
   "index_id",
+  "location_id",
   "section_break_xpjvg",
   "specific_items",
   "section_break_wz7vz",
@@ -57,15 +60,31 @@
    "label": "Items",
    "mandatory_depends_on": "specific_items",
    "options": "CEBA WMS Storage Location Item"
+  },
+  {
+   "fieldname": "warehouse",
+   "fieldtype": "Link",
+   "label": "Warehouse",
+   "options": "Warehouse"
+  },
+  {
+   "fieldname": "location_id",
+   "fieldtype": "Data",
+   "label": "Location ID"
+  },
+  {
+   "fieldname": "general_details_section",
+   "fieldtype": "Section Break",
+   "label": "General Details"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-12-18 19:24:13.304684",
+ "modified": "2023-12-29 15:44:17.181230",
  "modified_by": "Administrator",
  "module": "Ez-Supermarket",
- "name": "CEBA WMS Storage Location",
- "naming_rule": "Expression (old style)",
+ "name": "Shelf Location",
+ "naming_rule": "Expression",
  "owner": "Administrator",
  "permissions": [
   {

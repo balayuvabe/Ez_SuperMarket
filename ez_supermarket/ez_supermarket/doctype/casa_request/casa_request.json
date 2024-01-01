@@ -1,6 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
+ "autoname": "format: CASAREQ/{DD}-{MM}-{YY}/{####}",
  "creation": "2023-12-20 12:53:26.164564",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -61,10 +62,11 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2023-12-20 13:05:18.630048",
+ "modified": "2023-12-30 11:33:03.004110",
  "modified_by": "Administrator",
  "module": "Ez-Supermarket",
  "name": "Casa Request",
+ "naming_rule": "Expression",
  "owner": "Administrator",
  "permissions": [
   {
