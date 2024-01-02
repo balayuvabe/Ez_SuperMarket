@@ -10,6 +10,7 @@
   "request_raised_by",
   "column_break_aadn",
   "posting_time",
+  "timestamp",
   "section_break_xbqv",
   "stall_request_details",
   "section_break_oy5a",
@@ -66,12 +67,19 @@
   {
    "fieldname": "section_break_xbqv",
    "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "timestamp",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "label": "Timestamp",
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2023-12-21 15:11:02.323439",
+ "modified": "2024-01-01 16:51:25.576763",
  "modified_by": "Administrator",
  "module": "Ez-Supermarket",
  "name": "Stall Refill Request",

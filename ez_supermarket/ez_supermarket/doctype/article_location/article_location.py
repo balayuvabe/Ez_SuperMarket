@@ -5,5 +5,5 @@
 from frappe.model.document import Document
 
 
-class CEBAWMSSettingsStorageLocation(Document):
+class ArticleLocation(Document):
 	pass

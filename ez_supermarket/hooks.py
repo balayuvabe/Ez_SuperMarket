@@ -32,6 +32,7 @@ doctype_js = {
     "Material Request" : "ez_supermarket/custom/material_request/material_request.js",
     "Purchase Order" : "ez_supermarket/custom/purchase_order/purchase_order.js",
     "Purchase Invoice" : "ez_supermarket/custom/purchase_invoice/purchase_invoice.js",
+    "Purchase Receipt" : "ez_supermarket/custom/purchase_receipt/purchase_receipt.js",
     "Item" : "ez_supermarket/custom/item/item.js",}
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
@@ -125,7 +126,15 @@ doctype_js = {
 # Document Events
 # ---------------
 # Hook on document methods and events
-
+doc_events = {
+    "Purchase Invoice": {
+        "on_submit": "ez_supermarket.ez_supermarket.custom.purchase_invoice.purchase_invoice.on_submit"
+    },
+    "Purchase Receipt": {
+        "on_submit": "ez_supermarket.ez_supermarket.custom.purchase_receipt.purchase_receipt.on_submit",
+        "before_submit" : "ez_supermarket.ez_supermarket.custom.purchase_receipt.purchase_receipt.before_submit"
+    }
+}
 # doc_events = {
 #	"*": {
 #		"on_update": "method",
