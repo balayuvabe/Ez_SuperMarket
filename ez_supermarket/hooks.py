@@ -127,9 +127,9 @@ doctype_js = {
 # ---------------
 # Hook on document methods and events
 doc_events = {
-    # "Purchase Invoice": {
-    #     "on_submit": "ez_supermarket.ez_supermarket.custom.purchase_invoice.purchase_invoice.on_submit"
-    # },
+    "Purchase Invoice": {
+        "on_submit": "ez_supermarket.ez_supermarket.custom.purchase_invoice.purchase_invoice.on_submit"
+    },
     "Purchase Receipt": {
         "on_submit": "ez_supermarket.ez_supermarket.custom.purchase_receipt.purchase_receipt.on_submit",
         "before_submit" : "ez_supermarket.ez_supermarket.custom.purchase_receipt.purchase_receipt.before_submit"

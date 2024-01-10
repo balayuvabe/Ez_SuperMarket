@@ -1,0 +1,292 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "naming_series:",
+ "creation": "2023-08-28 10:11:19.653816",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "supplier_section",
+  "title",
+  "naming_series",
+  "regular_supplier",
+  "individual",
+  "company",
+  "column_break_7",
+  "posting_date",
+  "supplier",
+  "payment_made_to",
+  "column_break_9klp3",
+  "supplier_address",
+  "supplier_address_detail",
+  "email",
+  "section_break_or04d",
+  "scan_barcode",
+  "column_break_vgkna",
+  "update_stock",
+  "send_items_to_its_default_location",
+  "to_another_location",
+  "set_warehouse",
+  "section_break_zqkyh",
+  "items",
+  "section_break_19",
+  "total_incoming_value",
+  "column_break_22",
+  "grand_total",
+  "additional_costs_section",
+  "additional_costs",
+  "total_additional_costs",
+  "more_info",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "supplier_section",
+   "fieldtype": "Section Break"
+  },
+  {
+   "allow_on_submit": 1,
+   "default": "{supplier_name}",
+   "fieldname": "title",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Title",
+   "no_copy": 1,
+   "print_hide": 1,
+   "reqd": 1
+  },
+  {
+   "default": "QKP-.DD./.MM.-.####",
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "options": "QKP-.DD./.MM.-.####"
+  },
+  {
+   "default": "0",
+   "fieldname": "regular_supplier",
+   "fieldtype": "Check",
+   "label": "Regular Supplier",
+   "read_only_depends_on": "eval:doc.individual === 1"
+  },
+  {
+   "default": "0",
+   "fieldname": "individual",
+   "fieldtype": "Check",
+   "label": "Individual",
+   "read_only_depends_on": "eval:doc.regular_supplier === 1"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "label": "Company",
+   "options": "Company"
+  },
+  {
+   "fieldname": "column_break_7",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Today",
+   "fieldname": "posting_date",
+   "fieldtype": "Date",
+   "label": "Posting Date"
+  },
+  {
+   "depends_on": "eval:doc.regular_supplier === 1 || doc.individual === 1",
+   "fieldname": "supplier",
+   "fieldtype": "Link",
+   "label": "Supplier",
+   "mandatory_depends_on": "eval:doc.regular_supplier === 1 || doc.individual === 1",
+   "options": "Supplier"
+  },
+  {
+   "depends_on": "eval:doc.individual === 1",
+   "fieldname": "payment_made_to",
+   "fieldtype": "Data",
+   "label": "Payment Made To",
+   "mandatory_depends_on": "eval:doc.individual === 1"
+  },
+  {
+   "fieldname": "column_break_9klp3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_or04d",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "scan_barcode",
+   "fieldtype": "Data",
+   "label": "Scan Barcode",
+   "options": "Barcode"
+  },
+  {
+   "fieldname": "column_break_vgkna",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "update_stock",
+   "fieldtype": "Check",
+   "label": "Update Stock"
+  },
+  {
+   "default": "0",
+   "depends_on": "eval:doc.update_stock === 1",
+   "fieldname": "send_items_to_its_default_location",
+   "fieldtype": "Check",
+   "label": "Send Items to its Default Location",
+   "read_only_depends_on": "eval:doc.to_another_location === 1"
+  },
+  {
+   "default": "0",
+   "depends_on": "eval:doc.update_stock === 1",
+   "fieldname": "to_another_location",
+   "fieldtype": "Check",
+   "label": "To another Location",
+   "read_only_depends_on": "eval:doc.send_items_to_its_default_location === 1"
+  },
+  {
+   "depends_on": "eval:doc.to_another_location === 1",
+   "fieldname": "set_warehouse",
+   "fieldtype": "Link",
+   "label": "Set Target Warehouse",
+   "mandatory_depends_on": "eval:doc.update_stock === 1",
+   "options": "Warehouse"
+  },
+  {
+   "fieldname": "section_break_zqkyh",
+   "fieldtype": "Section Break"
+  },
+  {
+   "allow_bulk_edit": 1,
+   "fieldname": "items",
+   "fieldtype": "Table",
+   "label": "Items",
+   "oldfieldname": "mtn_details",
+   "oldfieldtype": "Table",
+   "options": "Purchase Items",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_19",
+   "fieldtype": "Section Break",
+   "print_hide": 1
+  },
+  {
+   "fieldname": "total_incoming_value",
+   "fieldtype": "Currency",
+   "hidden": 1,
+   "label": "Total Incoming Value (Receipt)",
+   "options": "Company:company:default_currency",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_22",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "grand_total",
+   "fieldtype": "Currency",
+   "label": "Grand Total"
+  },
+  {
+   "collapsible": 1,
+   "collapsible_depends_on": "total_additional_costs",
+   "fieldname": "additional_costs_section",
+   "fieldtype": "Section Break",
+   "hidden": 1,
+   "label": "Additional Costs"
+  },
+  {
+   "fieldname": "additional_costs",
+   "fieldtype": "Table",
+   "label": "Additional Costs",
+   "options": "Landed Cost Taxes and Charges"
+  },
+  {
+   "fieldname": "total_additional_costs",
+   "fieldtype": "Currency",
+   "label": "Total Additional Costs",
+   "options": "Company:company:default_currency",
+   "print_hide_if_no_value": 1,
+   "read_only": 1
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "more_info",
+   "fieldtype": "Section Break",
+   "label": "More Information",
+   "oldfieldtype": "Section Break"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Purchase Master",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "fetch_from": ".supplier_primary_address",
+   "fieldname": "supplier_address",
+   "fieldtype": "Link",
+   "label": "Supplier Address",
+   "options": "Address"
+  },
+  {
+   "fetch_from": "supplier.email_id",
+   "fieldname": "email",
+   "fieldtype": "Data",
+   "label": "Email",
+   "read_only": 1
+  },
+  {
+   "fieldname": "supplier_address_detail",
+   "fieldtype": "Small Text",
+   "hidden": 1,
+   "label": "Supplier Address Detail"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [
+  {
+   "group": "Quick Purchase",
+   "link_doctype": "Purchase Invoice",
+   "link_fieldname": "custom_reference_document"
+  }
+ ],
+ "modified": "2024-01-09 21:48:33.534550",
+ "modified_by": "Administrator",
+ "module": "Ez-Supermarket",
+ "name": "Purchase Master",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "track_seen": 1
+}
