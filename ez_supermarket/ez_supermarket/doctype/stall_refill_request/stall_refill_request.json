@@ -1,6 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
+ "autoname": "format:STKREF--{DD}-{MM}-{YY}-{####}",
  "creation": "2023-12-21 15:00:33.530022",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -11,10 +12,14 @@
   "column_break_aadn",
   "posting_time",
   "timestamp",
+  "last_fetch_timestamp",
+  "edit_last_fetch_timestamp",
   "section_break_xbqv",
   "stall_request_details",
   "section_break_oy5a",
-  "amended_from"
+  "amended_from",
+  "logs_tab",
+  "timestamp_logs"
  ],
  "fields": [
   {
@@ -52,7 +57,9 @@
    "default": "Today",
    "fieldname": "posting_date",
    "fieldtype": "Date",
-   "label": "Posting Date"
+   "label": "Posting Date",
+   "read_only": 1,
+   "reqd": 1
   },
   {
    "default": "Now",
@@ -74,15 +81,39 @@
    "in_list_view": 1,
    "label": "Timestamp",
    "reqd": 1
+  },
+  {
+   "fieldname": "logs_tab",
+   "fieldtype": "Tab Break",
+   "label": "Logs"
+  },
+  {
+   "fieldname": "timestamp_logs",
+   "fieldtype": "Table",
+   "label": "Timestamp Logs",
+   "options": "Timestamp Log"
+  },
+  {
+   "fieldname": "last_fetch_timestamp",
+   "fieldtype": "Datetime",
+   "label": "Last Fetch Timestamp",
+   "search_index": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "edit_last_fetch_timestamp",
+   "fieldtype": "Check",
+   "label": "Edit Last Fetch Timestamp"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-01-01 16:51:25.576763",
+ "modified": "2024-01-06 16:22:06.958038",
  "modified_by": "Administrator",
  "module": "Ez-Supermarket",
  "name": "Stall Refill Request",
+ "naming_rule": "Expression",
  "owner": "Administrator",
  "permissions": [
   {
