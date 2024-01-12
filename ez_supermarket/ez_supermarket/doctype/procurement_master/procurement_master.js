@@ -72,21 +72,25 @@ function transferToItemDetails(frm) {
   var items = frm.doc.items || [];
   var itemDetails = frm.doc.item_details || [];
 
-  // Clear existing rows in item_details
-  frm.clear_table("item_details");
+  // Only transfer values if item_details is empty
+  if (itemDetails.length === 0) {
+    // Clear existing rows in item_details
+    frm.clear_table("item_details");
 
-  // Transfer values from items to item_details
-  $.each(items, function (i, item) {
-    var child = frm.add_child("item_details");
-    child.item_code = item.item_code;
-    child.uom = item.uom;
-    child.rate = item.rate;
-    child.total_qty = item.qty;
-    // Add other fields as needed
-  });
+    // Transfer values from items to item_details
+    $.each(items, function (i, item) {
+      var child = frm.add_child("item_details");
+      child.item_code = item.item_code;
+      child.uom = item.uom;
+      child.rate = item.rate;
+      child.total_qty = item.qty;
+      // Add other fields as needed
+    });
 
-  frm.refresh_field("item_details");
+    frm.refresh_field("item_details");
+  }
 }
+
 function checkPrices(frm) {
   var items = frm.doc.items || [];
   var rows = [];
@@ -326,21 +330,21 @@ function setStatusVal(frm) {
   let accepted = 0;
   let rejected = 0;
 
-  frm.doc.accepted_item.forEach((row) => {
+  frm.doc.item_details.forEach((row) => {
     accepted += row.accepted_qty;
     rejected += row.rejected_qty;
   });
 
   if (accepted == 0) {
-    frm.set_value("status", "Rejected");
+    frm.set_value("qc_status", "Rejected");
     frm.toggle_reqd("rejected_warehouse", true);
   } else if (rejected == 0) {
-    frm.set_value("status", "Accepted");
+    frm.set_value("qc_status", "Accepted");
     frm.toggle_reqd("rejected_warehouse", false);
   } else {
-    frm.set_value("status", "Partially Accepted");
+    frm.set_value("qc_status", "Partially Accepted");
     frm.toggle_reqd("rejected_warehouse", true);
   }
 
-  refresh_field("status");
+  refresh_field("qc_status");
 }
