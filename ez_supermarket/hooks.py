@@ -132,7 +132,7 @@ doc_events = {
     },
     "Purchase Receipt": {
         "on_submit": "ez_supermarket.ez_supermarket.custom.purchase_receipt.purchase_receipt.on_submit",
-        "before_submit" : "ez_supermarket.ez_supermarket.custom.purchase_receipt.purchase_receipt.before_submit"
+        # "before_submit" : "ez_supermarket.ez_supermarket.custom.purchase_receipt.purchase_receipt.before_submit"
     }
 }
 # doc_events = {
