@@ -2,6 +2,13 @@
  {
   "docstatus": 0,
   "doctype": "Workflow Action Master",
+  "modified": "2024-01-10 14:44:39.214453",
+  "name": "Send for QC",
+  "workflow_action_name": "Send for QC"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
   "modified": "2023-08-31 10:41:44.879458",
   "name": "Approve",
   "workflow_action_name": "Approve"
