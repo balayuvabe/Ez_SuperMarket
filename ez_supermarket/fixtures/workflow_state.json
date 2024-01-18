@@ -20,6 +20,87 @@
  {
   "docstatus": 0,
   "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2023-11-27 11:43:14.050863",
+  "name": "Purchase Received",
+  "style": "",
+  "workflow_state_name": "Purchase Received"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2023-11-27 13:20:41.933409",
+  "name": "Details Updated",
+  "style": "",
+  "workflow_state_name": "Details Updated"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2023-11-27 13:20:56.199605",
+  "name": "Purchase Confirmed",
+  "style": "",
+  "workflow_state_name": "Purchase Confirmed"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2023-12-27 15:00:52.368496",
+  "name": "Order Sent",
+  "style": "",
+  "workflow_state_name": "Order Sent"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2023-12-27 15:05:10.594044",
+  "name": "Set Prices",
+  "style": "",
+  "workflow_state_name": "Set Prices"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2023-12-27 15:05:36.851857",
+  "name": "Order Completed",
+  "style": "",
+  "workflow_state_name": "Order Completed"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2023-12-27 15:01:33.461832",
+  "name": "Order Received",
+  "style": "",
+  "workflow_state_name": "Order Received"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2023-12-27 15:03:39.701817",
+  "name": "Order Sent to Supplier",
+  "style": "",
+  "workflow_state_name": "Order Sent to Supplier"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2023-11-27 11:41:26.411209",
+  "name": "Update Price",
+  "style": "",
+  "workflow_state_name": "Update Price"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
   "icon": "question-sign",
   "modified": "2023-08-31 10:41:44.840569",
   "name": "Pending",
@@ -43,6 +124,15 @@
   "name": "Rejected",
   "style": "Danger",
   "workflow_state_name": "Rejected"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2023-08-31 14:31:34.741188",
+  "name": "Draft",
+  "style": "",
+  "workflow_state_name": "Draft"
  },
  {
   "docstatus": 0,
@@ -286,95 +376,5 @@
   "name": "Pending Approval",
   "style": "",
   "workflow_state_name": "Pending Approval"
- },
- {
-  "docstatus": 0,
-  "doctype": "Workflow State",
-  "icon": "",
-  "modified": "2023-11-27 11:43:14.050863",
-  "name": "Purchase Received",
-  "style": "",
-  "workflow_state_name": "Purchase Received"
- },
- {
-  "docstatus": 0,
-  "doctype": "Workflow State",
-  "icon": "",
-  "modified": "2023-11-27 13:20:41.933409",
-  "name": "Details Updated",
-  "style": "",
-  "workflow_state_name": "Details Updated"
- },
- {
-  "docstatus": 0,
-  "doctype": "Workflow State",
-  "icon": "",
-  "modified": "2023-11-27 13:20:56.199605",
-  "name": "Purchase Confirmed",
-  "style": "",
-  "workflow_state_name": "Purchase Confirmed"
- },
- {
-  "docstatus": 0,
-  "doctype": "Workflow State",
-  "icon": "",
-  "modified": "2023-12-27 15:00:52.368496",
-  "name": "Order Sent",
-  "style": "",
-  "workflow_state_name": "Order Sent"
- },
- {
-  "docstatus": 0,
-  "doctype": "Workflow State",
-  "icon": "",
-  "modified": "2023-12-27 15:05:10.594044",
-  "name": "Set Prices",
-  "style": "",
-  "workflow_state_name": "Set Prices"
- },
- {
-  "docstatus": 0,
-  "doctype": "Workflow State",
-  "icon": "",
-  "modified": "2023-12-27 15:05:36.851857",
-  "name": "Order Completed",
-  "style": "",
-  "workflow_state_name": "Order Completed"
- },
- {
-  "docstatus": 0,
-  "doctype": "Workflow State",
-  "icon": "",
-  "modified": "2023-08-31 14:31:34.741188",
-  "name": "Draft",
-  "style": "",
-  "workflow_state_name": "Draft"
- },
- {
-  "docstatus": 0,
-  "doctype": "Workflow State",
-  "icon": "",
-  "modified": "2023-12-27 15:01:33.461832",
-  "name": "Order Received",
-  "style": "",
-  "workflow_state_name": "Order Received"
- },
- {
-  "docstatus": 0,
-  "doctype": "Workflow State",
-  "icon": "",
-  "modified": "2023-12-27 15:03:39.701817",
-  "name": "Order Sent to Supplier",
-  "style": "",
-  "workflow_state_name": "Order Sent to Supplier"
- },
- {
-  "docstatus": 0,
-  "doctype": "Workflow State",
-  "icon": "",
-  "modified": "2023-11-27 11:41:26.411209",
-  "name": "Update Price",
-  "style": "",
-  "workflow_state_name": "Update Price"
  }
 ]

@@ -25,7 +25,7 @@
    "fieldtype": "Link",
    "label": "Amended From",
    "no_copy": 1,
-   "options": "Casa Request",
+   "options": "Clients Request",
    "print_hide": 1,
    "read_only": 1,
    "search_index": 1
@@ -62,7 +62,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2023-12-30 11:33:03.004110",
+ "modified": "2024-01-18 15:23:17.985759",
  "modified_by": "Administrator",
  "module": "Ez-Supermarket",
  "name": "Clients Request",
