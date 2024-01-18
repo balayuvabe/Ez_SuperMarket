@@ -1,11 +1,6 @@
 {
- "charts": [
-  {
-   "chart_name": "Stall Refill",
-   "label": "Stall Refill"
-  }
- ],
- "content": "[{\"id\":\"tQCbI9ooNT\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Ez Super Market</span>\",\"col\":12}},{\"id\":\"bnyI6g50k_\",\"type\":\"card\",\"data\":{\"card_name\":\"Quick Update\",\"col\":4}},{\"id\":\"FqZ6x5pIH_\",\"type\":\"card\",\"data\":{\"card_name\":\"Stock\",\"col\":4}},{\"id\":\"RQ0r4IMHsF\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Remove Expired Items\",\"col\":3}},{\"id\":\"HiRQ2N5JPB\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"JQGvPPORGF\",\"type\":\"card\",\"data\":{\"card_name\":\"Warehouse Management\",\"col\":4}},{\"id\":\"oeMoH8uBlA\",\"type\":\"card\",\"data\":{\"card_name\":\"Purchase\",\"col\":4}},{\"id\":\"T5AEiJnYAt\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Stall Refill\",\"col\":12}}]",
+ "charts": [],
+ "content": "[{\"id\":\"tQCbI9ooNT\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Ez Super Market</span>\",\"col\":12}},{\"id\":\"HiRQ2N5JPB\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"9KN9-Hvme9\",\"type\":\"card\",\"data\":{\"card_name\":\"Item Details\",\"col\":4}},{\"id\":\"9BwUpvMjZR\",\"type\":\"card\",\"data\":{\"card_name\":\"Stall Related\",\"col\":4}},{\"id\":\"tE4OIBUgoc\",\"type\":\"card\",\"data\":{\"card_name\":\"Purchase\",\"col\":4}},{\"id\":\"JQGvPPORGF\",\"type\":\"card\",\"data\":{\"card_name\":\"Warehouse Management\",\"col\":4}}]",
  "creation": "2023-12-18 19:16:55.631944",
  "custom_blocks": [],
  "docstatus": 0,
@@ -18,90 +13,6 @@
  "is_hidden": 0,
  "label": "Ez Super Market",
  "links": [
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Warehouse Management",
-   "link_count": 4,
-   "onboard": 0,
-   "type": "Card Break"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Warehouse",
-   "link_count": 0,
-   "link_to": "Warehouse",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "CEBA WMS Settings",
-   "link_count": 0,
-   "link_to": "CEBA WMS Settings",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "CEBA WMS Storage Location",
-   "link_count": 0,
-   "link_to": "Shelf Location",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Warehouse Type",
-   "link_count": 0,
-   "link_to": "Warehouse Type",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Stock",
-   "link_count": 2,
-   "onboard": 0,
-   "type": "Card Break"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Casa Request",
-   "link_count": 0,
-   "link_to": "Casa Request",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Adjust Stock",
-   "link_count": 0,
-   "link_to": "Stock Adjust",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Quick Update",
-   "link_count": 2,
-   "onboard": 0,
-   "type": "Card Break"
-  },
   {
    "hidden": 0,
    "is_query_report": 0,
@@ -125,27 +36,9 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "Purchase",
-   "link_count": 5,
-   "onboard": 0,
-   "type": "Card Break"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
    "label": "Procurement Master",
    "link_count": 0,
    "link_to": "Procurement Master",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Purchase Master",
-   "link_count": 0,
-   "link_to": "Purchase Master",
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
@@ -179,9 +72,165 @@
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Purchase",
+   "link_count": 4,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Procurement Master",
+   "link_count": 0,
+   "link_to": "Procurement Master",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Purchase Order",
+   "link_count": 0,
+   "link_to": "Purchase Order",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Purchase Invoice",
+   "link_count": 0,
+   "link_to": "Purchase Invoice",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Purchase Receipt",
+   "link_count": 0,
+   "link_to": "Purchase Receipt",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Stall Related",
+   "link_count": 2,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Client Requests",
+   "link_count": 0,
+   "link_to": "Casa Request",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Stall Refill Request",
+   "link_count": 0,
+   "link_to": "Stall Refill Request",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Item Details",
+   "link_count": 2,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Item List",
+   "link_count": 0,
+   "link_to": "Item",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Price Update",
+   "link_count": 0,
+   "link_to": "Item Price",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Warehouse Management",
+   "link_count": 4,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Warehouse",
+   "link_count": 0,
+   "link_to": "Warehouse",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Warehouse Type",
+   "link_count": 0,
+   "link_to": "Warehouse Type",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Adjust Stock",
+   "link_count": 0,
+   "link_to": "Stock Adjust",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Transfer Stock",
+   "link_count": 0,
+   "link_to": "Stock Entry",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
   }
  ],
- "modified": "2024-01-10 16:35:18.302062",
+ "modified": "2024-01-12 23:22:30.780568",
  "modified_by": "Administrator",
  "module": "Ez-Supermarket",
  "name": "Ez Super Market",
@@ -192,15 +241,6 @@
  "quick_lists": [],
  "roles": [],
  "sequence_id": 2.0,
- "shortcuts": [
-  {
-   "color": "Red",
-   "doc_view": "List",
-   "label": "Remove Expired Items",
-   "link_to": "Stock Entry",
-   "stats_filter": "[[\"Stock Entry\",\"purpose\",\"=\",\"Material Issue\",false],[\"Stock Entry\",\"stock_entry_type\",\"=\",\"Material Issue\",false]]",
-   "type": "DocType"
-  }
- ],
+ "shortcuts": [],
  "title": "Ez Super Market"
 }

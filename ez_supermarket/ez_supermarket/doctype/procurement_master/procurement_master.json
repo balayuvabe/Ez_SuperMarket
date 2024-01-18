@@ -7,6 +7,7 @@
  "document_type": "Document",
  "engine": "InnoDB",
  "field_order": [
+  "purchase_order_tab",
   "title",
   "naming_series",
   "supplier",
@@ -840,6 +841,11 @@
    "fieldtype": "Table",
    "label": "Item Details",
    "options": "PM Accepted Items"
+  },
+  {
+   "fieldname": "purchase_order_tab",
+   "fieldtype": "Tab Break",
+   "label": "Purchase Order"
   }
  ],
  "hide_toolbar": 1,
@@ -847,7 +853,7 @@
  "idx": 204,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-01-10 17:38:34.648299",
+ "modified": "2024-01-13 11:38:48.768296",
  "modified_by": "Administrator",
  "module": "Ez-Supermarket",
  "name": "Procurement Master",

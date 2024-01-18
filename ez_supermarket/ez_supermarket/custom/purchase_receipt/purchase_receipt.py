@@ -64,16 +64,21 @@ def update_item_prices(doc, method):
             new_item_price.insert()
 
 def update_batch_expiry_after_submit(doc, method):
-    if doc.doctype == "Purchase Receipt" and doc.docstatus == 1:
-        # Find the batches created by this Purchase Receipt
-        batches = frappe.get_list("Batch", filters={"reference_doctype": "Purchase Receipt", "reference_name": doc.name})
-        
-        for batch in batches:
-            # Get the custom_expiry_date from the Purchase Receipt
-            expiry_date = frappe.get_value("Purchase Receipt Item", {"parent": doc.name}, "custom_expiry_date")
+  if doc.doctype == "Purchase Receipt" and doc.docstatus == 1:
+    # Get all items 
+    items = doc.items
+    
+    for item in items:
+      # Get custom_expiry_date for this item
+      expiry_date = item.custom_expiry_date
+      
+      # Find batches for this item
+      batches = frappe.get_list("Batch", {"item": item.item_code, "reference_name": doc.name})
+      
+      for batch in batches:
+        # Update expiry date
+        frappe.db.set_value("Batch", batch.name, "expiry_date", expiry_date)
 
-            # Update Batch Expiry Date
-            frappe.db.set_value("Batch", batch.name, "expiry_date", expiry_date)
 
 def on_submit(doc, method):
     update_batch_expiry_after_submit(doc, method)
