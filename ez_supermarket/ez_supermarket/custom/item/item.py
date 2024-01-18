@@ -37,7 +37,7 @@ def apply_tax_template(doc_json):
 
             # Create another row in the taxes child table for Out-State tax category
             tax_row_out_state = {
-                "item_tax_template": "IGST {}% - {}".format(tax_rate, company_abbr),
+                "item_tax_template": "GST {}% - {}".format(tax_rate, company_abbr),
                 "tax_category": "Out-State"
             }
             doc["taxes"].append(tax_row_out_state)
