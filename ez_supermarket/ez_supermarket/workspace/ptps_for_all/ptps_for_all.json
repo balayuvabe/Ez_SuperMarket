@@ -1,7 +1,7 @@
 {
  "charts": [],
- "content": "[{\"id\":\"tQCbI9ooNT\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Ez Super Market</span>\",\"col\":12}},{\"id\":\"HiRQ2N5JPB\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"9KN9-Hvme9\",\"type\":\"card\",\"data\":{\"card_name\":\"Item Details\",\"col\":4}},{\"id\":\"9BwUpvMjZR\",\"type\":\"card\",\"data\":{\"card_name\":\"Stall Related\",\"col\":4}},{\"id\":\"tE4OIBUgoc\",\"type\":\"card\",\"data\":{\"card_name\":\"Purchase\",\"col\":4}},{\"id\":\"JQGvPPORGF\",\"type\":\"card\",\"data\":{\"card_name\":\"Warehouse Management\",\"col\":4}}]",
- "creation": "2023-12-18 19:16:55.631944",
+ "content": "[{\"id\":\"Xrqu_o3x1h\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">PTPS For All</span>\",\"col\":12}},{\"id\":\"N35_cyf_v3\",\"type\":\"card\",\"data\":{\"card_name\":\"Item / Article Details\",\"col\":4}},{\"id\":\"_CLQlPTlRg\",\"type\":\"card\",\"data\":{\"card_name\":\"Stall Related\",\"col\":4}},{\"id\":\"8GkLUl5v9l\",\"type\":\"card\",\"data\":{\"card_name\":\"Purchase\",\"col\":4}},{\"id\":\"cmv9l_u_kK\",\"type\":\"card\",\"data\":{\"card_name\":\"Warehouse  / Stock\",\"col\":4}}]",
+ "creation": "2024-01-19 15:04:26.581242",
  "custom_blocks": [],
  "docstatus": 0,
  "doctype": "Workspace",
@@ -11,8 +11,17 @@
  "idx": 0,
  "indicator_color": "green",
  "is_hidden": 0,
- "label": "Ez Super Market",
+ "label": "PTPS For All",
  "links": [
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Item / Article Details",
+   "link_count": 3,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
   {
    "hidden": 0,
    "is_query_report": 0,
@@ -26,7 +35,7 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "Update Price",
+   "label": "Update Item Price",
    "link_count": 0,
    "link_to": "Item Price",
    "link_type": "DocType",
@@ -36,9 +45,28 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "Procurement Master",
+   "label": "Stock Balance",
    "link_count": 0,
-   "link_to": "Procurement Master",
+   "link_to": "stock-balance",
+   "link_type": "Page",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Stall Related",
+   "link_count": 2,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Clients Request",
+   "link_count": 0,
+   "link_to": "Clients Request",
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
@@ -46,29 +74,9 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "Purchase Order",
+   "label": "Stall Refill Request",
    "link_count": 0,
-   "link_to": "Procurement Master",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Purchase Invoice",
-   "link_count": 0,
-   "link_to": "Purchase Invoice",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Purchase Receipt",
-   "link_count": 0,
-   "link_to": "Purchase Receipt",
+   "link_to": "Stall Refill Request",
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
@@ -125,65 +133,7 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "Stall Related",
-   "link_count": 2,
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Card Break"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Client Requests",
-   "link_count": 0,
-   "link_to": "Casa Request",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Stall Refill Request",
-   "link_count": 0,
-   "link_to": "Stall Refill Request",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Item Details",
-   "link_count": 2,
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Card Break"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Item List",
-   "link_count": 0,
-   "link_to": "Item",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Price Update",
-   "link_count": 0,
-   "link_to": "Item Price",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Warehouse Management",
+   "label": "Warehouse  / Stock",
    "link_count": 4,
    "link_type": "DocType",
    "onboard": 0,
@@ -202,7 +152,7 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "Warehouse Type",
+   "label": "Warehouse type",
    "link_count": 0,
    "link_to": "Warehouse Type",
    "link_type": "DocType",
@@ -222,7 +172,7 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "Transfer Stock",
+   "label": "Stock Transfer",
    "link_count": 0,
    "link_to": "Stock Entry",
    "link_type": "DocType",
@@ -230,17 +180,17 @@
    "type": "Link"
   }
  ],
- "modified": "2024-01-12 23:22:30.780568",
+ "modified": "2024-01-19 15:26:18.620553",
  "modified_by": "Administrator",
  "module": "Ez-Supermarket",
- "name": "Ez Super Market",
+ "name": "PTPS For All",
  "number_cards": [],
  "owner": "Administrator",
  "parent_page": "",
  "public": 1,
  "quick_lists": [],
  "roles": [],
- "sequence_id": 2.0,
+ "sequence_id": 5.0,
  "shortcuts": [],
- "title": "Ez Super Market"
+ "title": "PTPS For All"
 }

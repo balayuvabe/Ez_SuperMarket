@@ -131,6 +131,7 @@
   {
    "fieldname": "total_qty_available",
    "fieldtype": "Data",
+   "in_list_view": 1,
    "label": "Current Stock"
   },
   {
@@ -247,7 +248,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2023-12-19 11:35:45.228989",
+ "modified": "2024-01-18 23:26:56.931220",
  "modified_by": "Administrator",
  "module": "Ez-Supermarket",
  "name": "Stock Adjust Details",
