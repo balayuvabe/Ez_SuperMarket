@@ -1,7 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "format: STKA-.DD.-.MM.-.YY.-.###",
+ "autoname": "format: STKA-{DD}-{MM}-{YY}-{###}",
  "creation": "2023-10-25 15:18:47.261830",
  "default_view": "List",
  "doctype": "DocType",
@@ -185,7 +185,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2023-12-19 15:42:50.348204",
+ "modified": "2024-01-18 23:21:05.945410",
  "modified_by": "Administrator",
  "module": "Ez-Supermarket",
  "name": "Stock Adjust",
