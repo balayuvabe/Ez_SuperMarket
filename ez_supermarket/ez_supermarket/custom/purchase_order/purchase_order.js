@@ -30,6 +30,29 @@ frappe.ui.form.on("Purchase Order", {
     });
   },
   refresh: function (frm) {
+    if (frm.doc.docstatus == 1) {
+      frm.page.add_inner_button(
+        __("Intiate Quality Check"),
+
+        () => {
+          const doc_name = frm.docname;
+          const doc_type = frm.doctype;
+
+          frappe.call({
+            method:
+              "ez_supermarket.ez_supermarket.doctype.quality_check.quality_check.generate_quality_check",
+            args: {
+              doc_name: doc_name,
+              doc_type: doc_type,
+            },
+            callback: (r) => {
+              frappe.set_route("Form", "Quality Check", r.message);
+            },
+          });
+        },
+        __("Create")
+      );
+    }
     frm.fields_dict.items.grid.add_custom_button(
       __("Fetch Supplier Items"),
       function () {
