@@ -1,3 +1,6 @@
+// Copyright (c) 2023, Balamurugan and contributors
+// For license information, please see license.txt
+
 frappe.ui.form.on("Stock Entry Detail", {
   item_code: function (frm, cdt, cdn) {
     var row = locals[cdt][cdn];

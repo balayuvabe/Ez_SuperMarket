@@ -34,7 +34,8 @@ doctype_js = {
     # "Purchase Invoice" : "ez_supermarket/custom/purchase_invoice/purchase_invoice.js",
     "Purchase Receipt" : "ez_supermarket/custom/purchase_receipt/purchase_receipt.js",
     "Stock Entry" : "ez_supermarket/custom/stock_entry/stock_entry.js",
-    "Item" : "ez_supermarket/custom/item/item.js",}
+    "Item" : "ez_supermarket/custom/item/item.js",
+    "Supplier Quotation" : "ez_supermarket/custom/supplier_quotation/supplier_quotation.js",}
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
 # doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
@@ -247,5 +248,6 @@ doc_events = {
 fixtures = [
     "Workflow State", "Workflow Action Master",
     {"dt": "Workflow", "filters": [["name", "=", "Purchase & Price Update"]]},
-    {"dt": "Custom Field", "filters": [["module", "=", "Ez-Supermarket"]]},
+    {"dt": "Workflow", "filters": [["name", "in", ["Purchase & Price Update", "Supplier Approval"]]]},
+    {"dt": "Custom Field", "filters": [["module", "=", "Ez-Supermarket"]]}
 ]
