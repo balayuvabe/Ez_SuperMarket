@@ -1,37 +1,39 @@
 frappe.ui.form.on("Stall Refill Request", {
   refresh: function (frm) {
-    // Add custom button
-    frm.add_custom_button("Fetch Items Sold", () => {
-      frm.set_value("request_raised_by", frappe.session.user);
-      console.log("Button clicked"); // Log that the button was clicked
+    if (frm.doc.docstatus !== 1)
+      // Add custom button
+      frm.add_custom_button("Fetch Items Sold", () => {
+        frm.set_value("request_raised_by", frappe.session.user);
+        console.log("Button clicked"); // Log that the button was clicked
 
-      // Stringify the doc
-      let doc_str = JSON.stringify(frm.doc);
+        // Stringify the doc
+        let doc_str = JSON.stringify(frm.doc);
 
-      frappe.call({
-        method:
-          "ez_supermarket.ez_supermarket.doctype.stall_refill_request.stall_refill_request.set_timestamps",
-        args: { doc_str: doc_str }, // Pass stringified doc
-        callback: function (r) {
-          console.log("Callback received", r); // Log the callback response
-          if (r.message) {
-            let updatedDoc = r.message;
+        frappe.call({
+          method:
+            "ez_supermarket.ez_supermarket.doctype.stall_refill_request.stall_refill_request.set_timestamps",
+          args: { doc_str: doc_str }, // Pass stringified doc
+          callback: function (r) {
+            console.log("Callback received", r); // Log the callback response
+            if (r.message) {
+              let updatedDoc = r.message;
 
-            // Explicitly set values in the form
-            frm.set_value("timestamp", updatedDoc.timestamp);
-            frm.set_value(
-              "last_fetch_timestamp",
-              updatedDoc.last_fetch_timestamp
-            );
+              // Explicitly set values in the form
+              frm.set_value("timestamp", updatedDoc.timestamp);
+              frm.set_value(
+                "last_fetch_timestamp",
+                updatedDoc.last_fetch_timestamp
+              );
 
-            // Refresh the form to reflect the changes
-            frm.refresh();
+              // Refresh the form to reflect the changes
+              frm.refresh();
 
-            fetch_items_sold(frm);
-          }
-        },
+              fetch_items_sold(frm);
+            }
+          },
+        });
       });
-    });
+    filter_child_table_rows(frm);
   },
 });
 
@@ -65,4 +67,34 @@ function fetch_items_sold(frm) {
       }
     },
   });
+}
+// Filter child table function
+function filter_child_table_rows(frm) {
+  // Map roles to warehouses
+  let warehouse_map = {
+    "Store 1 Keeper": "Store 1 - PTPS",
+    "Store 2 Keeper": "Store 2 - PTPS",
+    // Add other roles and corresponding warehouses here
+  };
+
+  // Get the warehouses corresponding to the user's roles
+  let user_warehouses = frappe.user_roles
+    .map((role) => warehouse_map[role])
+    .filter(Boolean);
+
+  // If the user's roles are not in the warehouse_map, return without filtering
+  if (user_warehouses.length === 0) {
+    return;
+  }
+
+  // Filter the child table data
+  let filtered_data = frm.doc.stall_request_details.filter((row) => {
+    return user_warehouses.includes(row.store_warehouse);
+  });
+
+  // Assign the filtered data to the child table
+  frm.doc.stall_request_details = filtered_data;
+
+  // Refresh the child table
+  frm.refresh_field("stall_request_details");
 }
