@@ -1,5 +1,6 @@
 {
  "actions": [],
+ "allow_import": 1,
  "allow_rename": 1,
  "autoname": "field:name1",
  "creation": "2023-12-29 18:23:01.420262",
@@ -56,7 +57,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-01-29 16:18:00.400292",
+ "modified": "2024-01-30 17:16:22.406552",
  "modified_by": "Administrator",
  "module": "Ez-Supermarket",
  "name": "Article Location",
