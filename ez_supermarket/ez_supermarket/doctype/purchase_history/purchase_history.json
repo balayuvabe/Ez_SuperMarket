@@ -1,0 +1,55 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-01-31 15:37:57.982241",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "item_code",
+  "cmp",
+  "lmp",
+  "llmp"
+ ],
+ "fields": [
+  {
+   "fieldname": "item_code",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Item Code",
+   "options": "Item",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "cmp",
+   "fieldtype": "Float",
+   "label": "CMP",
+   "read_only": 1
+  },
+  {
+   "fieldname": "lmp",
+   "fieldtype": "Float",
+   "label": "LMP",
+   "read_only": 1
+  },
+  {
+   "fieldname": "llmp",
+   "fieldtype": "Float",
+   "label": "LLMP",
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2024-02-01 00:17:22.028253",
+ "modified_by": "Administrator",
+ "module": "Ez-Supermarket",
+ "name": "Purchase History",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
