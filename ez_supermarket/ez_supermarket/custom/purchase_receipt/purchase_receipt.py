@@ -85,7 +85,6 @@ def update_item_prices(doc, method):
             new_item_price.insert()
 
 def update_batch_expiry_after_submit(doc, method):
-  return
   if doc.doctype == "Purchase Receipt" and doc.docstatus == 1:
     # Get all items 
     items = doc.items
