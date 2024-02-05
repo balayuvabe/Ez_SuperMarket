@@ -17,29 +17,6 @@ frappe.ui.form.on("Purchase Receipt", {
     }
   },
 });
-//   before_submit: function (frm) {
-//     frappe.call({
-//       method:
-//         "ez_supermarket.ez_supermarket.custom.purchase_receipt.purchase_receipt.before_submit",
-//       args: { doc: frm.doc },
-//       callback: function (r) {
-//         frappe.msgprint(__("Batches have been created."));
-//       },
-//     });
-//   },
-//   validate: function (frm) {
-//     // Iterate through each item in the document
-//     $.each(frm.doc.items || [], function (i, item) {
-//       // Set "serial_and_batch_bundle" equal to "batch_no"
-//       frappe.model.set_value(
-//         item.doctype,
-//         item.name,
-//         "serial_and_batch_bundle",
-//         item.custom_batch_number
-//       );
-//     });
-//   },
-// });
 
 function showItemDialog(frm) {
   // Fetch items from the Purchase Order
