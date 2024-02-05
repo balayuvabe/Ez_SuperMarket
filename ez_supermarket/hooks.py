@@ -134,6 +134,7 @@ doc_events = {
     # },
     "Purchase Receipt": {
         "on_submit": "ez_supermarket.ez_supermarket.custom.purchase_receipt.purchase_receipt.on_submit",
+        # "before_save": "ez_supermarket.ez_supermarket.custom.purchase_receipt.purchase_receipt.update_item_lead_time",
         # "before_submit" : "ez_supermarket.ez_supermarket.custom.purchase_receipt.purchase_receipt.before_submit"
     },
     "Stock Adjust":{

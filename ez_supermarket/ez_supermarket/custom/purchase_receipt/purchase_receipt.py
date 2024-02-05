@@ -7,43 +7,12 @@ from frappe import _
 from frappe import get_doc
 from frappe.model.document import Document
 from frappe.utils import nowdate
+import json
+from datetime import datetime
 
 
 class PurchaseReceipt(Document):
 	pass
-
-# def create_serial_and_batch_bundle_entry(item, parent_doc):
-#     # Create Serial and Batch Bundle document
-#     serial_and_batch_bundle_doc = get_doc({
-#         "doctype": "Serial and Batch Bundle",
-#         "item_code": item.item_code,
-#         "type_of_transaction": "Inward",
-#         "posting_date": parent_doc.posting_date,
-#         "posting_time": parent_doc.posting_time,
-#         "voucher_type": "Purchase Receipt",
-#         "voucher_no": parent_doc.name,
-#         "warehouse": item.warehouse,
-#         "entries": [
-#             {
-#                 "batch_no": item.custom_batch_number,
-#                 "qty": item.qty,
-#                 "warehouse": item.warehouse
-#             }
-#         ]
-#     })
-#     serial_and_batch_bundle_doc.insert()
-
-#     # Set the Serial and Batch Bundle document name in the child table (entries)
-#     item.serial_and_batch_bundle = serial_and_batch_bundle_doc.name
-
-# def create_serial_and_batch_bundle(parent_doc):
-#     if parent_doc.docstatus == 1:  # Check if the document is being submitted
-#         for item in parent_doc.items:
-#             create_serial_and_batch_bundle_entry(item, parent_doc)
-
-# @frappe.whitelist()
-# def before_submit(doc, method):
-#     create_serial_and_batch_bundle(doc)
 
 def update_item_prices(doc, method):
     for item in doc.items:
@@ -78,6 +47,67 @@ def update_batch_expiry_after_submit(doc, method):
       for batch in batches:
         # Update expiry date
         frappe.db.set_value("Batch", batch.name, "expiry_date", expiry_date)
+        
+# @frappe.whitelist()
+# def update_item_lead_time(items, pr_date):
+#     """
+#     Updates the lead time days for items based on the provided purchase request date.
+
+#     Args:
+#         items (str): JSON representation of a list of items, each containing at least 'item_code' and 'purchase_order'.
+#         pr_date (str): Purchase request date in the format '%Y-%m-%d'.
+
+#     Returns:
+#         list: A list of messages indicating the updated lead time days for each item.
+
+#     Example:
+#         items = '[{"item_code": "ABC", "purchase_order": "PO123"}, {"item_code": "XYZ", "purchase_order": "PO456"}]'
+#         pr_date = '2024-02-05'
+#         result = update_item_lead_time(items, pr_date)
+#         print(result)
+#     """
+#     date_format = '%Y-%m-%d'
+
+#     try:
+#         pr_date = datetime.strptime(pr_date, date_format).date()
+#     except ValueError:
+#         return ["Error: Invalid date format. Please provide a valid date string in the format '%Y-%m-%d'."]
+
+#     items = json.loads(items)
+
+#     updated_lead_time_days = []
+
+#     for item in (i for i in items if i.get("purchase_order")):
+#         po_date = frappe.db.get_value("Purchase Order", item["purchase_order"], "transaction_date")
+#         lead_time_days = (pr_date - po_date).days
+
+#         if lead_time_days > 0:
+#             frappe.db.set_value('Item', item["item_code"], 'lead_time_days', lead_time_days)
+#             msg = f'Updated Item Code {item["item_code"]} Lead Time Days {lead_time_days}d'
+#             updated_lead_time_days.append(msg)
+
+#     return updated_lead_time_days
+
+@frappe.whitelist()
+def update_item_lead_time(items, pr_date):
+  date_format = '%Y-%m-%d'
+  pr_date = datetime.strptime(pr_date, date_format).date()
+  items = json.loads(items)
+
+  items = list(filter(lambda x: x.get("purchase_order"), items))
+
+  updated_lead_time_days = []
+  for item in items:
+    po_date = frappe.db.get_value("Purchase Order", item["purchase_order"], "transaction_date")
+    lead_time_days = (pr_date - po_date).days
+
+    if lead_time_days > 0:
+      frappe.db.set_value('Item', item["item_code"], 'lead_time_days', lead_time_days)
+      msg = f'Updated Item Code {item["item_code"]} Lead Time Days {lead_time_days}d'
+      updated_lead_time_days.append(msg)
+
+  return updated_lead_time_days 
+ 
 
 
 def on_submit(doc, method):
