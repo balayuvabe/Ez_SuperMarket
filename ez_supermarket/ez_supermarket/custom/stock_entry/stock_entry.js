@@ -1,5 +1,32 @@
 // Copyright (c) 2023, Balamurugan and contributors
 // For license information, please see license.txt
+frappe.ui.form.on("Stock Entry", {
+  refresh: function (frm) {
+    frm.fields_dict["items"].grid.get_field("item_location").get_query =
+      function (doc, cdt, cdn) {
+        var child = locals[cdt][cdn];
+        if (doc.purpose === "Material Transfer") {
+          return {
+            filters: { warehouse: child.s_warehouse },
+          };
+        } else {
+          return {};
+        }
+      };
+
+    frm.fields_dict["items"].grid.get_field("to_item_location").get_query =
+      function (doc, cdt, cdn) {
+        var child = locals[cdt][cdn];
+        if (doc.purpose === "Material Transfer") {
+          return {
+            filters: { warehouse: child.t_warehouse },
+          };
+        } else {
+          return {};
+        }
+      };
+  },
+});
 
 frappe.ui.form.on("Stock Entry Detail", {
   item_code: function (frm, cdt, cdn) {

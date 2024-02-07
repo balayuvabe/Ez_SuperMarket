@@ -1,6 +1,6 @@
 {
  "charts": [],
- "content": "[{\"id\":\"Xrqu_o3x1h\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">PTPS For All</span>\",\"col\":12}},{\"id\":\"N35_cyf_v3\",\"type\":\"card\",\"data\":{\"card_name\":\"Item / Article Details\",\"col\":4}},{\"id\":\"_CLQlPTlRg\",\"type\":\"card\",\"data\":{\"card_name\":\"Stall Related\",\"col\":4}},{\"id\":\"8GkLUl5v9l\",\"type\":\"card\",\"data\":{\"card_name\":\"Purchase\",\"col\":4}},{\"id\":\"cmv9l_u_kK\",\"type\":\"card\",\"data\":{\"card_name\":\"Warehouse  / Stock\",\"col\":4}}]",
+ "content": "[{\"id\":\"Xrqu_o3x1h\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Supermarket Mode</span>\",\"col\":12}},{\"id\":\"N35_cyf_v3\",\"type\":\"card\",\"data\":{\"card_name\":\"Item / Article Details\",\"col\":4}},{\"id\":\"_CLQlPTlRg\",\"type\":\"card\",\"data\":{\"card_name\":\"Stall Related\",\"col\":4}},{\"id\":\"8GkLUl5v9l\",\"type\":\"card\",\"data\":{\"card_name\":\"Purchase\",\"col\":4}},{\"id\":\"cmv9l_u_kK\",\"type\":\"card\",\"data\":{\"card_name\":\"Warehouse  / Stock\",\"col\":4}}]",
  "creation": "2024-01-19 15:04:26.581242",
  "custom_blocks": [],
  "docstatus": 0,
@@ -9,9 +9,9 @@
  "hide_custom": 0,
  "icon": "retail",
  "idx": 0,
- "indicator_color": "green",
+ "indicator_color": "",
  "is_hidden": 0,
- "label": "PTPS For All",
+ "label": "Supermarket",
  "links": [
   {
    "hidden": 0,
@@ -180,10 +180,10 @@
    "type": "Link"
   }
  ],
- "modified": "2024-01-19 15:26:18.620553",
+ "modified": "2024-02-06 10:45:32.198375",
  "modified_by": "Administrator",
  "module": "Ez-Supermarket",
- "name": "PTPS For All",
+ "name": "Supermarket",
  "number_cards": [],
  "owner": "Administrator",
  "parent_page": "",
@@ -192,5 +192,5 @@
  "roles": [],
  "sequence_id": 5.0,
  "shortcuts": [],
- "title": "PTPS For All"
+ "title": "Supermarket"
 }

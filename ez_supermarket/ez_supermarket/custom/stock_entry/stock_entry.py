@@ -21,3 +21,16 @@ def validate(self):
             
             if item.s_location != item.custom_default_store_location:
                 frappe.msgprint(_("Expecting source location as {}".format(item.custom_default_store_location)))
+
+
+# @frappe.whitelist()
+# def on_submit(self, method):
+#     for item in self.items:
+#         # Get the Serial and Batch Bundle document for the item
+#         bundle = frappe.get_doc("Serial and Batch Bundle", item.serial_and_batch_bundle)
+        
+#         # Subtract the quantity sold from the bundle quantity
+#         bundle.qty -= item.qty_sold
+        
+#         # Save the updated bundle
+#         bundle.save()

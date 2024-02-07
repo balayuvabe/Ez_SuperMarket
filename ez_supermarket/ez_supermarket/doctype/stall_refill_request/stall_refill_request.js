@@ -36,9 +36,62 @@ frappe.ui.form.on("Stall Refill Request", {
           },
         });
       });
-    filter_child_table_rows(frm);
+    if (frm.doc.docstatus === 1)
+      frm.add_custom_button("Send The Item", () => {
+        var doc = frappe.model.get_new_doc("Stock Entry");
+
+        // Set the fields of the document as required
+        doc.stock_entry_type = "Item Transfer to Stall";
+        doc.posting_date = frm.doc.posting_date;
+        doc.posting_time = frm.doc.posting_time;
+
+        $.each(frm.doc.stall_request_details, function (i, d) {
+          var child = frappe.model.add_child(
+            doc,
+            "Stock Entry Detail",
+            "items"
+          );
+          child.item_code = d.item_code;
+          child.qty = d.qty_sold;
+          child.s_warehouse = "Store - PTPS"; // Ensure this is set
+          child.t_warehouse = "Stall - PTPS";
+          child.valuation_rate = d.valuation_rate;
+          child.allow_zero_valuation_rate = 1;
+        });
+
+        // Save the document and show a success message
+        frappe.call({
+          method: "frappe.client.insert",
+          args: {
+            doc: doc,
+          },
+          callback: function (r) {
+            if (!r.exc) {
+              frappe.show_alert(
+                __("Document {0} created successfully", [r.message.name])
+              );
+              frappe.set_route("Form", "Stock Entry", r.message.name);
+            }
+          },
+        });
+      });
   },
 });
+//           method:
+//             "ez_supermarket.ez_supermarket.doctype.stall_refill_request.stall_refill_request.create_item_transfer_to_stall",
+//           args: {
+//             stall_request: frm.doc.name,
+//           },
+//           callback: function (r) {
+//             if (r.message) {
+//               frm.refresh();
+//               frappe.msgprint(__("Item sent successfully."));
+//             }
+//           },
+//         });
+//       });
+//   },
+// });
 
 function fetch_items_sold(frm) {
   let posting_date = frm.doc.posting_date;
@@ -72,32 +125,57 @@ function fetch_items_sold(frm) {
   });
 }
 // Filter child table function
-function filter_child_table_rows(frm) {
-  // Map roles to warehouses
-  let warehouse_map = {
-    "Store 1 Keeper": "Store 1 - PTPS",
-    "Store 2 Keeper": "Store 2 - PTPS",
-    // Add other roles and corresponding warehouses here
-  };
+function filterChildTable(frm) {
+  const warehouseSettingsName = "Yb Supermarket Settings";
 
-  // Get the warehouses corresponding to the user's roles
-  let user_warehouses = frappe.user_roles
-    .map((role) => warehouse_map[role])
-    .filter(Boolean);
+  // Fetch warehouse settings doc
+  frappe.call({
+    method: "frappe.client.get",
+    args: {
+      doctype: "Yb Supermarket Settings",
+      name: warehouseSettingsName,
+    },
+    callback: function (response) {
+      if (response.message) {
+        const warehouseKeepers = response.message.warehouse_keeper;
+        const warehouseMap = {};
 
-  // If the user's roles are not in the warehouse_map, return without filtering
-  if (user_warehouses.length === 0) {
-    return;
-  }
+        warehouseKeepers.forEach((row) => {
+          warehouseMap[row.role] = row.warehouse;
+        });
 
-  // Filter the child table data
-  let filtered_data = frm.doc.stall_request_details.filter((row) => {
-    return user_warehouses.includes(row.store_warehouse);
+        console.log("Warehouse Map:", warehouseMap); // Log warehouse roles
+
+        // Get user roles
+        const userRoles = frappe.user_roles.filter(
+          (role) => warehouseMap[role]
+        );
+        console.log("User Roles:", userRoles); // Log user roles
+
+        // Get user warehouses
+        const userWarehouses = userRoles.map((role) => warehouseMap[role]);
+
+        // Filter rows based on user's warehouses
+        const filteredRows = frm.doc.stall_request_details.filter((row) => {
+          return userWarehouses.includes(row.store_warehouse);
+        });
+
+        // Update child table with filtered rows
+        frm.fields_dict.stall_request_details.grid.get_field(
+          "store_warehouse"
+        ).get_query = function (doc, cdt, cdn) {
+          return {
+            filters: {
+              warehouse: userWarehouses,
+            },
+          };
+        };
+
+        // Update child table with filtered rows
+        frm.fields_dict.stall_request_details.grid.df.options = userWarehouses;
+        frm.doc.stall_request_details = filteredRows;
+        frm.refresh_field("stall_request_details");
+      }
+    },
   });
-
-  // Assign the filtered data to the child table
-  frm.doc.stall_request_details = filtered_data;
-
-  // Refresh the child table
-  frm.refresh_field("stall_request_details");
 }
