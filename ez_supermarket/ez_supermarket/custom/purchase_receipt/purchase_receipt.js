@@ -23,6 +23,27 @@ frappe.ui.form.on("Purchase Receipt", {
       );
     }
   },
+
+  before_submit: function(frm) {
+    const items = frm.doc.items;
+    const pr_date = frm.doc.posting_date;
+
+    if(!items) return
+
+    frappe.call({
+      method: "ez_supermarket.ez_supermarket.custom.purchase_receipt.purchase_receipt.update_item_lead_time",
+      args: { items: items, pr_date: pr_date },
+      callback: function(r) {
+        if(!r.message) return
+        r.message.forEach((msg) => {
+          frappe.show_alert({
+            message: __(msg),
+            indicator: 'blue'
+          }, 3)
+        })
+      }
+    })
+  }
 });
 
 function showItemDialog(frm) {
