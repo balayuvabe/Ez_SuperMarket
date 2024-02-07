@@ -3,6 +3,13 @@
 
 frappe.ui.form.on("Purchase Receipt", {
   refresh: function (frm) {
+    frm.fields_dict["items"].grid.get_field("item_location").get_query =
+      function (doc, cdt, cdn) {
+        var child = locals[cdt][cdn];
+        return {
+          filters: { warehouse: child.warehouse || frm.doc.set_warehouse },
+        };
+      };
     if (
       frappe.user.has_role("PTPS_EXECUTIVE_1") ||
       frappe.user.has_role("PTPS_EXECUTIVE_2")
@@ -223,3 +230,31 @@ function calSellingPrice(row) {
 
   cur_frm.fields_dict["items"].grid.refresh();
 }
+
+frappe.ui.form.on("Purchase Receipt Item", {
+  item_code: function (frm, cdt, cdn) {
+    var child = locals[cdt][cdn];
+    var warehouse = child.set_warehouse || child.warehouse; // Use set_warehouse from parent if provided, otherwise use warehouse from child table
+
+    frappe.call({
+      method:
+        "ez_supermarket.ez_supermarket.custom.purchase_receipt.purchase_receipt.fetch_item_details",
+      args: {
+        item_code: child.item_code,
+        set_warehouse: warehouse,
+        warehouse: warehouse,
+      },
+      callback: function (r) {
+        if (r.message) {
+          frappe.model.set_value(cdt, cdn, "warehouse", r.message.warehouse);
+          frappe.model.set_value(
+            cdt,
+            cdn,
+            "item_location",
+            r.message.item_location
+          );
+        }
+      },
+    });
+  },
+});

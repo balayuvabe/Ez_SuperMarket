@@ -115,3 +115,25 @@ def on_submit(doc, method):
     update_item_prices(doc, method)
     
 
+@frappe.whitelist()
+def fetch_item_details(item_code, set_warehouse=None, warehouse=None):
+    warehouse = set_warehouse or warehouse  # Use set_warehouse from parent if provided, otherwise use warehouse from child table
+
+    if warehouse:
+        item = frappe.get_doc("Item", item_code)
+        if not item:
+            return {}
+
+        if item.custom_default_store_warehouse == warehouse:
+            return {
+                "warehouse": warehouse,
+                "item_location": item.custom_default_store_location
+            }
+        elif item.custom_default_stall_warehouse == warehouse:
+            return {
+                "warehouse": warehouse,
+                "item_location": item.custom_default_stall_location
+            }
+
+    return {}
+

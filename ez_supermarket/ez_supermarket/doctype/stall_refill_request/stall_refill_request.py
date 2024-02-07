@@ -93,3 +93,71 @@ def fetch_items_sold(posting_date, timestamp, last_fetch_ts=None):
         data.append(item_data)  # Append to list
 
     return data
+
+# @frappe.whitelist()
+# def create_item_transfer_to_stall(stall_request):
+#     stall_request = frappe.get_doc("Stall Refill Request", stall_request)
+#     if stall_request.docstatus != 1:
+#         raise Exception("Document is not saved")
+
+#     stock_entry = frappe.new_doc("Stock Entry")
+#     stock_entry.stock_entry_type = "Item Transfer to Stall"
+#     stock_entry.posting_date = stall_request.posting_date
+#     stock_entry.posting_time = stall_request.posting_time
+#     # stock_entry.company = stall_request.company
+#     # stock_entry.from_warehouse = stall_request.store_warehouse
+#     # stock_entry.to_warehouse = stall_request.custom_default_stall_warehouse
+
+#     for item in stall_request.stall_request_details:
+#         item_doc = frappe.get_doc("Item", item.item_code)
+#         valuation_rate = item_doc.valuation_rate if item_doc.valuation_rate is not None and item_doc.valuation_rate != 0 else 1
+        
+#         # Adjust the quantity in the Serial and Batch Bundle
+#         # bundle = frappe.get_doc("Serial and Batch Bundle", item.serial_and_batch_bundle)
+#         # bundle.qty -= item.qty_sold
+#         # bundle.save()
+        
+#         stock_entry.append("items", {
+#             "item_code": item.item_code,
+#             "qty": item.qty_sold,
+#             "s_warehouse": item_doc.custom_default_store_warehouse,
+#             "t_warehouse": item_doc.custom_default_stall_warehouse,
+#             "valuation rate": valuation_rate,
+#             "allow_zero_valuation_rate" : "1"
+#         })
+
+#     stock_entry.insert()
+#     # stock_entry.submit()
+
+#     return stock_entry.name
+
+
+# @frappe.whitelist()
+# def create_item_transfer_to_stall(stall_request):
+#     stall_request = frappe.get_doc("Stall Refill Request", stall_request)
+#     if stall_request.docstatus != 1:
+#         raise Exception("Document is not saved")
+
+#     stock_entry = frappe.new_doc("Stock Entry")
+#     stock_entry.stock_entry_type = "Material Transfer"
+#     stock_entry.posting_date = stall_request.posting_date
+#     stock_entry.posting_time = stall_request.posting_time
+
+#     for item in stall_request.stall_request_details:
+#         item_doc = frappe.get_doc("Item", item.item_code)
+#         valuation_rate = item_doc.valuation_rate if item_doc.valuation_rate is not None and item_doc.valuation_rate != 0 else 1
+
+#         stock_entry.append("items", {
+#             "item_code": item.item_code,
+#             "qty": item.qty_sold,
+#             "s_warehouse": item.store_warehouse,
+#             "t_warehouse": "Stall - PTPS",
+#             "valuation rate": valuation_rate
+#         })
+
+#     stock_entry.insert()
+
+#     # Get the URL of the newly created Stock Entry page
+#     stock_entry_url = frappe.utils.get_url_to_form("Stock Entry", stock_entry.name)
+
+#     return stock_entry_url
