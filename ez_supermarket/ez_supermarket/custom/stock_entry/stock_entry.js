@@ -26,6 +26,25 @@ frappe.ui.form.on("Stock Entry", {
         }
       };
   },
+  onload: function (frm) {
+    if (frm.doc.custom_document_type === "Stall Refill Request") {
+      $.each(frm.doc.items || [], function (i, d) {
+        if (d.item_code) {
+          frm.script_manager.trigger("item_code", d.doctype, d.name);
+        }
+        // Check if valuation rate is 0, blank, or null
+        if (!d.basic_rate || d.basic_rate === 0) {
+          // Set allow_zero_valuation_rate to 1
+          frappe.model.set_value(
+            d.doctype,
+            d.name,
+            "allow_zero_valuation_rate",
+            1
+          );
+        }
+      });
+    }
+  },
 });
 
 frappe.ui.form.on("Stock Entry Detail", {
