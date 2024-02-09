@@ -376,5 +376,23 @@
   "name": "Pending Approval",
   "style": "",
   "workflow_state_name": "Pending Approval"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2024-02-09 12:15:28.333754",
+  "name": "Initiate 2nd QC",
+  "style": "",
+  "workflow_state_name": "Initiate 2nd QC"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2024-02-09 12:14:27.916502",
+  "name": "Initiate QC",
+  "style": "",
+  "workflow_state_name": "Initiate QC"
  }
 ]

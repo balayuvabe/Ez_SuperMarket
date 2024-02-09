@@ -251,5 +251,6 @@ fixtures = [
     "Workflow State", "Workflow Action Master",
     {"dt": "Workflow", "filters": [["name", "=", "Purchase & Price Update"]]},
     {"dt": "Workflow", "filters": [["name", "in", ["Purchase & Price Update", "Supplier Approval"]]]},
-    {"dt": "Custom Field", "filters": [["module", "=", "Ez-Supermarket"]]}
+    {"dt": "Custom Field", "filters": [["module", "=", "Ez-Supermarket"]]},
+    {"dt": "Workflow", "filters": [["document_type", "=", "Procurement Master"]]}
 ]
