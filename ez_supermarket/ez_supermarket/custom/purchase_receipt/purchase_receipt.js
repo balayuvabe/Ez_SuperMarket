@@ -23,27 +23,36 @@ frappe.ui.form.on("Purchase Receipt", {
       );
     }
   },
+  before_submit: function (frm) {
+    const pr_name = frm.doc.name;
 
-  before_submit: function(frm) {
-    const items = frm.doc.items;
-    const pr_date = frm.doc.posting_date;
+    if (!pr_name) {
+      console.log("No Purchase Receipt name found");
+      return;
+    }
 
-    if(!items) return
+    console.log("PR Name:", pr_name);
 
     frappe.call({
-      method: "ez_supermarket.ez_supermarket.custom.purchase_receipt.purchase_receipt.update_item_lead_time",
-      args: { items: items, pr_date: pr_date },
-      callback: function(r) {
-        if(!r.message) return
-        r.message.forEach((msg) => {
-          frappe.show_alert({
-            message: __(msg),
-            indicator: 'blue'
-          }, 3)
-        })
-      }
-    })
-  }
+      method:
+        "ez_supermarket.ez_supermarket.custom.purchase_receipt.purchase_receipt.update_item_lead_time",
+      args: { pr_name: pr_name },
+      callback: function (r) {
+        console.log("Function response:", r);
+        if (r.message) {
+          frappe.show_alert(
+            {
+              message: __(r.message),
+              indicator: "blue",
+            },
+            3
+          );
+        } else {
+          console.log("No message in response");
+        }
+      },
+    });
+  },
 });
 
 function showItemDialog(frm) {
@@ -102,6 +111,13 @@ function showItemDialog(frm) {
           },
         },
         {
+          fieldname: "mrp",
+          label: "MRP",
+          fieldtype: "Currency",
+          default: frm.doc.items[currentIndex].custom_mrp,
+          read_only: "1",
+        },
+        {
           fieldname: "selling_price_wo_taxes",
           label: "Selling Price without Taxes",
           fieldtype: "Currency",
@@ -144,6 +160,13 @@ function showItemDialog(frm) {
       ],
       primary_action: function () {
         var values = dialog.get_values();
+
+        var mrp = frm.doc.items[currentIndex].custom_mrp;
+        var sellingPriceWithTaxes = values.selling_price_with_taxes || 0;
+        if (sellingPriceWithTaxes > mrp) {
+          frappe.msgprint("Selling price cannot exceed <b>MRP</b>");
+          return;
+        }
 
         // Update the current item with the new values
         frm.doc.items[currentIndex].item_code = values.item_code;
