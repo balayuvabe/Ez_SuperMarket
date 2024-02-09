@@ -30,6 +30,29 @@ frappe.ui.form.on("Purchase Order", {
     });
   },
   refresh: function (frm) {
+    if (frm.doc.docstatus == 1) {
+      frm.page.add_inner_button(
+        __("Intiate Quality Check"),
+
+        () => {
+          const doc_name = frm.docname;
+          const doc_type = frm.doctype;
+
+          frappe.call({
+            method:
+              "ez_supermarket.ez_supermarket.doctype.quality_check.quality_check.generate_quality_check",
+            args: {
+              doc_name: doc_name,
+              doc_type: doc_type,
+            },
+            callback: (r) => {
+              frappe.set_route("Form", "Quality Check", r.message);
+            },
+          });
+        },
+        __("Create")
+      );
+    }
     frm.fields_dict.items.grid.add_custom_button(
       __("Fetch Supplier Items"),
       function () {
@@ -41,61 +64,6 @@ frappe.ui.form.on("Purchase Order", {
     });
   },
 });
-
-frappe.ui.form.on("Purchase Order Item", {
-  item_code: (frm, cdt, cdn) =>{
-    add_item(frm)
-  },
-  items_remove: (frm, cdt, cdn) =>{
-    add_item(frm)
-  }
-});
-
-async function add_item(frm) {
-  let items_p = [];
-  let items_s = [];
-  if (frm.doc.items) {
-    for (let r of frm.doc.items) {
-      if (r.item_code) {
-        let item = r.item_code;
-        try {
-          let res = await new Promise((resolve, reject) => {
-            frappe.call({
-              method: "ez_supermarket.ez_supermarket.doctype.purchase_history.purchase_history.get_item_details",
-              args: { item_list: item },
-              callback: function (r) {
-                if (r.message) {
-                  items_p.push({
-                    "item_code": item,
-                    "cmp": r.message[5],
-                    "lmp": r.message[3],
-                    "llmp": r.message[4],
-                  });
-                  items_s.push({
-                    "item_code": item,
-                    "cms": r.message[2],
-                    "lms": r.message[0],
-                    "llms": r.message[1],
-                  });
-                  resolve();
-                } else {
-                  reject();
-                }
-              },
-            });
-          });
-        } catch (error) {
-          console.error("Error fetching item details");
-        }
-      }
-    }
-    frm.set_value("custom_purchase_history_item_table", items_p);
-    frm.set_value("custom_sales_history_item_table", items_s);
-    frm.refresh_field("custom_purchase_history_item_table");
-    frm.refresh_field("custom_sales_history_item_table");
-  }
-}
-
 function checkPrices(frm) {
   var items = frm.doc.items || [];
   var rows = [];
