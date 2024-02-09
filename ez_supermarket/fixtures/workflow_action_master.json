@@ -117,5 +117,12 @@
   "modified": "2023-08-31 15:07:28.889923",
   "name": "Send For Approval",
   "workflow_action_name": "Send For Approval"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2024-02-09 12:18:46.058254",
+  "name": "initiate 2nd QC",
+  "workflow_action_name": "initiate 2nd QC"
  }
 ]
