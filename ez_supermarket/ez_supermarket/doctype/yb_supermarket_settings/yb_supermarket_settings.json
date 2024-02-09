@@ -12,7 +12,14 @@
   "reference_document",
   "create_inventory_dimension",
   "column_break_zltk",
-  "warehouse_keeper"
+  "warehouse_keeper",
+  "toggle_features_tab",
+  "select_the_features_you_need_section",
+  "stall_refill_request",
+  "clients_request",
+  "quick_purchase",
+  "expense_entry",
+  "stock_adjust"
  ],
  "fields": [
   {
@@ -63,12 +70,52 @@
    "fieldtype": "Table",
    "label": "Warehouse Keeper",
    "options": "Warehouse Incharge"
+  },
+  {
+   "fieldname": "toggle_features_tab",
+   "fieldtype": "Tab Break",
+   "label": "Toggle Features"
+  },
+  {
+   "fieldname": "select_the_features_you_need_section",
+   "fieldtype": "Section Break",
+   "label": "Select The Features You Need"
+  },
+  {
+   "default": "0",
+   "fieldname": "stall_refill_request",
+   "fieldtype": "Check",
+   "label": "Stall Refill Request"
+  },
+  {
+   "default": "0",
+   "fieldname": "quick_purchase",
+   "fieldtype": "Check",
+   "label": "Quick Purchase"
+  },
+  {
+   "default": "0",
+   "fieldname": "clients_request",
+   "fieldtype": "Check",
+   "label": "Clients Request"
+  },
+  {
+   "default": "0",
+   "fieldname": "stock_adjust",
+   "fieldtype": "Check",
+   "label": "Stock Adjust"
+  },
+  {
+   "default": "0",
+   "fieldname": "expense_entry",
+   "fieldtype": "Check",
+   "label": "Expense Entry"
   }
  ],
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2024-02-05 17:26:50.906983",
+ "modified": "2024-02-09 15:29:38.539587",
  "modified_by": "Administrator",
  "module": "Ez-Supermarket",
  "name": "Yb Supermarket Settings",

@@ -3,39 +3,67 @@
 
 frappe.ui.form.on("Stall Refill Request", {
   refresh: function (frm) {
-    if (frm.doc.docstatus !== 1)
-      // Add custom button
-      frm.add_custom_button("Fetch Items Sold", () => {
-        frm.set_value("request_raised_by", frappe.session.user);
-        console.log("Button clicked"); // Log that the button was clicked
+    // Check the value of the Client Request checkbox
+    frappe.model.with_doc(
+      "Yb Supermarket Settings",
+      "Yb Supermarket Settings",
+      function () {
+        var settings_doc = frappe.get_doc(
+          "Yb Supermarket Settings",
+          "Yb Supermarket Settings"
+        );
+        if (settings_doc.stall_refill_request == 0) {
+          // If Client Request is not checked, hide the form and throw an error
+          $.each(frm.fields_dict, function (fieldname, field) {
+            field.df.hidden = 1;
+          });
+          frm.refresh_fields();
+          // Disable the Save button
+          frm.disable_save();
+          var settings_link = frappe.utils.get_form_link(
+            "Yb Supermarket Settings",
+            settings_doc.name
+          );
+          frappe.throw(
+            "You must enable <strong>Stall Refill Request</strong> feature in <a href='" +
+              settings_link +
+              "'><strong>Yb Supermarket Settings</a></strong> to access this page."
+          );
+        }
+      }
+    );
+    // Add Supplierwise item function
+    frm.add_custom_button("Fetch Items Sold", () => {
+      frm.set_value("request_raised_by", frappe.session.user);
+      console.log("Button clicked"); // Log that the button was clicked
 
-        // Stringify the doc
-        let doc_str = JSON.stringify(frm.doc);
+      // Stringify the doc
+      let doc_str = JSON.stringify(frm.doc);
 
-        frappe.call({
-          method:
-            "ez_supermarket.ez_supermarket.doctype.stall_refill_request.stall_refill_request.set_timestamps",
-          args: { doc_str: doc_str }, // Pass stringified doc
-          callback: function (r) {
-            console.log("Callback received", r); // Log the callback response
-            if (r.message) {
-              let updatedDoc = r.message;
+      frappe.call({
+        method:
+          "ez_supermarket.ez_supermarket.doctype.stall_refill_request.stall_refill_request.set_timestamps",
+        args: { doc_str: doc_str }, // Pass stringified doc
+        callback: function (r) {
+          console.log("Callback received", r); // Log the callback response
+          if (r.message) {
+            let updatedDoc = r.message;
 
-              // Explicitly set values in the form
-              frm.set_value("timestamp", updatedDoc.timestamp);
-              frm.set_value(
-                "last_fetch_timestamp",
-                updatedDoc.last_fetch_timestamp
-              );
+            // Explicitly set values in the form
+            frm.set_value("timestamp", updatedDoc.timestamp);
+            frm.set_value(
+              "last_fetch_timestamp",
+              updatedDoc.last_fetch_timestamp
+            );
 
-              // Refresh the form to reflect the changes
-              frm.refresh();
+            // Refresh the form to reflect the changes
+            frm.refresh();
 
-              fetch_items_sold(frm);
-            }
-          },
-        });
+            fetch_items_sold(frm);
+          }
+        },
       });
+    });
     filterChildTable(frm);
     if (frm.doc.docstatus === 1)
       frm.add_custom_button("Send The Item", () => {

@@ -34,13 +34,16 @@
    "default": "Today",
    "fieldname": "posting_date",
    "fieldtype": "Date",
-   "label": "Posting Date"
+   "in_list_view": 1,
+   "label": "Posting Date",
+   "reqd": 1
   },
   {
    "fieldname": "casa_request_details",
    "fieldtype": "Table",
    "label": "Casa Request Details",
-   "options": "Casa Request Details"
+   "options": "Casa Request Details",
+   "reqd": 1
   },
   {
    "default": "Today",
@@ -62,7 +65,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-01-18 15:23:17.985759",
+ "modified": "2024-02-09 13:39:01.517319",
  "modified_by": "Administrator",
  "module": "Ez-Supermarket",
  "name": "Clients Request",

@@ -2,28 +2,39 @@
  "actions": [],
  "allow_rename": 1,
  "autoname": "naming_series:",
- "creation": "2023-10-25 15:18:47.261830",
+ "creation": "2023-08-28 10:11:19.653816",
  "default_view": "List",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
   "supplier_section",
+  "title",
   "naming_series",
-  "reason",
+  "regular_supplier",
+  "individual",
   "company",
   "column_break_7",
   "posting_date",
-  "posting_time",
-  "edit_posting_date_and_time",
   "supplier",
   "payment_made_to",
+  "column_break_9klp3",
+  "paid",
+  "mode_of_payment",
+  "cash_bank_account",
   "section_break_or04d",
   "scan_barcode",
+  "column_break_vgkna",
+  "update_stock",
+  "send_items_to_its_default_location",
+  "to_another_location",
+  "set_warehouse",
+  "section_break_zqkyh",
   "items",
   "section_break_19",
   "total_incoming_value",
   "column_break_22",
+  "grand_total",
   "additional_costs_section",
   "additional_costs",
   "total_additional_costs",
@@ -36,18 +47,36 @@
    "fieldtype": "Section Break"
   },
   {
-   "fieldname": "naming_series",
-   "fieldtype": "Select",
+   "allow_on_submit": 1,
+   "default": "{supplier_name}",
+   "fieldname": "title",
+   "fieldtype": "Data",
    "hidden": 1,
-   "label": "Series",
-   "read_only": 1
+   "label": "Title",
+   "no_copy": 1,
+   "print_hide": 1,
+   "reqd": 1
   },
   {
-   "fieldname": "reason",
-   "fieldtype": "Data",
-   "in_list_view": 1,
-   "label": "Reason",
-   "reqd": 1
+   "default": "QKP-.DD./.MM.-.####",
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "options": "QKP-.DD./.MM.-.####"
+  },
+  {
+   "default": "0",
+   "fieldname": "regular_supplier",
+   "fieldtype": "Check",
+   "label": "Regular Supplier",
+   "read_only_depends_on": "eval:doc.individual === 1"
+  },
+  {
+   "default": "0",
+   "fieldname": "individual",
+   "fieldtype": "Check",
+   "label": "Individual",
+   "read_only_depends_on": "eval:doc.regular_supplier === 1"
   },
   {
    "fieldname": "company",
@@ -64,22 +93,7 @@
    "default": "Today",
    "fieldname": "posting_date",
    "fieldtype": "Date",
-   "label": "Posting Date",
-   "read_only_depends_on": "eval:doc.edit_posting_date_and_time === 0"
-  },
-  {
-   "default": "Now",
-   "fieldname": "posting_time",
-   "fieldtype": "Time",
-   "label": "Posting Time",
-   "read_only": 1,
-   "read_only_depends_on": "eval:doc.edit_posting_date_and_time === 0"
-  },
-  {
-   "default": "0",
-   "fieldname": "edit_posting_date_and_time",
-   "fieldtype": "Check",
-   "label": "Edit Posting Time and Date"
+   "label": "Posting Date"
   },
   {
    "depends_on": "eval:doc.regular_supplier === 1 || doc.individual === 1",
@@ -97,6 +111,34 @@
    "mandatory_depends_on": "eval:doc.individual === 1"
   },
   {
+   "fieldname": "column_break_9klp3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "paid",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Paid",
+   "options": "\nYes\nNo",
+   "reqd": 1
+  },
+  {
+   "depends_on": "eval:doc.paid == \"Yes\"",
+   "fieldname": "mode_of_payment",
+   "fieldtype": "Link",
+   "label": "Mode of Payment",
+   "mandatory_depends_on": "eval:doc.paid == \"Yes\"",
+   "options": "Mode of Payment"
+  },
+  {
+   "depends_on": "eval:doc.paid == \"Yes\"",
+   "fieldname": "cash_bank_account",
+   "fieldtype": "Link",
+   "label": "Cash/Bank Account",
+   "mandatory_depends_on": "eval:doc.paid == \"Yes\"",
+   "options": "Account"
+  },
+  {
    "fieldname": "section_break_or04d",
    "fieldtype": "Section Break"
   },
@@ -107,13 +149,51 @@
    "options": "Barcode"
   },
   {
+   "fieldname": "column_break_vgkna",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "update_stock",
+   "fieldtype": "Check",
+   "label": "Update Stock"
+  },
+  {
+   "default": "0",
+   "depends_on": "eval:doc.update_stock === 1",
+   "fieldname": "send_items_to_its_default_location",
+   "fieldtype": "Check",
+   "label": "Send Items to its Default Location",
+   "read_only_depends_on": "eval:doc.to_another_location === 1"
+  },
+  {
+   "default": "0",
+   "depends_on": "eval:doc.update_stock === 1",
+   "fieldname": "to_another_location",
+   "fieldtype": "Check",
+   "label": "To another Location",
+   "read_only_depends_on": "eval:doc.send_items_to_its_default_location === 1"
+  },
+  {
+   "depends_on": "eval:doc.to_another_location === 1",
+   "fieldname": "set_warehouse",
+   "fieldtype": "Link",
+   "label": "Set Target Warehouse",
+   "mandatory_depends_on": "eval:doc.update_stock === 1",
+   "options": "Warehouse"
+  },
+  {
+   "fieldname": "section_break_zqkyh",
+   "fieldtype": "Section Break"
+  },
+  {
    "allow_bulk_edit": 1,
    "fieldname": "items",
    "fieldtype": "Table",
    "label": "Items",
    "oldfieldname": "mtn_details",
    "oldfieldtype": "Table",
-   "options": "Stock Adjust Details",
+   "options": "Quick Purchase Items",
    "reqd": 1
   },
   {
@@ -133,6 +213,11 @@
   {
    "fieldname": "column_break_22",
    "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "grand_total",
+   "fieldtype": "Currency",
+   "label": "Grand Total"
   },
   {
    "collapsible": 1,
@@ -168,18 +253,24 @@
    "fieldtype": "Link",
    "label": "Amended From",
    "no_copy": 1,
-   "options": "Stock Adjust",
+   "options": "Quick Purchase",
    "print_hide": 1,
    "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
- "links": [],
- "modified": "2024-02-09 15:00:42.866770",
+ "links": [
+  {
+   "group": "Quick Purchase",
+   "link_doctype": "Purchase Invoice",
+   "link_fieldname": "custom_reference_document"
+  }
+ ],
+ "modified": "2024-02-09 14:48:09.877066",
  "modified_by": "Administrator",
  "module": "Ez-Supermarket",
- "name": "Stock Adjust",
+ "name": "Quick Purchase",
  "naming_rule": "By \"Naming Series\" field",
  "owner": "Administrator",
  "permissions": [
@@ -193,6 +284,7 @@
    "report": 1,
    "role": "System Manager",
    "share": 1,
+   "submit": 1,
    "write": 1
   }
  ],
@@ -200,6 +292,5 @@
  "sort_order": "DESC",
  "states": [],
  "track_changes": 1,
- "track_seen": 1,
- "track_views": 1
+ "track_seen": 1
 }
