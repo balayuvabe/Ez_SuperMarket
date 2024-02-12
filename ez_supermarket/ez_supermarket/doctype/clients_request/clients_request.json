@@ -1,12 +1,13 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "format: CASAREQ/{DD}-{MM}-{YY}/{####}",
+ "autoname": "naming_series:",
  "creation": "2023-12-20 12:53:26.164564",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
   "section_break_i7ah",
+  "naming_series",
   "posting_date",
   "amended_from",
   "column_break_fjxv",
@@ -60,16 +61,24 @@
    "fieldname": "item_details_section",
    "fieldtype": "Section Break",
    "label": "Item Details"
+  },
+  {
+   "default": "Cli-Req-.DD.-.MM.-.YY.-.####",
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Naming Series",
+   "options": "Cli-Req-.DD.-.MM.-.YY.-.####",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-02-09 13:39:01.517319",
+ "modified": "2024-02-12 14:37:53.228089",
  "modified_by": "Administrator",
  "module": "Ez-Supermarket",
  "name": "Clients Request",
- "naming_rule": "Expression",
+ "naming_rule": "By \"Naming Series\" field",
  "owner": "Administrator",
  "permissions": [
   {

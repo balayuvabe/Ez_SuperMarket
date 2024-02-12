@@ -53,6 +53,19 @@ frappe.ui.form.on("Purchase Receipt", {
       },
     });
   },
+  validate: function (frm) {
+    $.each(frm.doc.items || [], function (i, d) {
+      if (d.custom_selling_price > d.custom_mrp) {
+        frappe.validated = false;
+        frappe.msgprint(
+          "Row " +
+            (i + 1) +
+            ": Selling price cannot exceed MRP for item " +
+            d.item_code
+        );
+      }
+    });
+  },
 });
 
 function showItemDialog(frm) {
@@ -115,8 +128,24 @@ function showItemDialog(frm) {
           label: "MRP",
           fieldtype: "Currency",
           default: frm.doc.items[currentIndex].custom_mrp,
-          read_only: "1",
+          description: "MRP will be updated if you change it here",
+          read_only: function () {
+            return !dialog.get_value("update_mrp");
+          },
         },
+        {
+          fieldtype: "Check",
+          fieldname: "update_mrp",
+          label: "Update MRP",
+          onchange: function () {
+            dialog.set_df_property(
+              "mrp",
+              "read_only",
+              !dialog.get_value("update_mrp")
+            );
+          },
+        },
+
         {
           fieldname: "selling_price_wo_taxes",
           label: "Selling Price without Taxes",
@@ -259,6 +288,20 @@ frappe.ui.form.on("Purchase Receipt Item", {
     var row = locals[cdt][cdn];
     calSellingPrice(row);
   },
+
+  custom_selling_price: function (frm, cdt, cdn) {
+    var row = locals[cdt][cdn];
+    var mrp = row.custom_mrp || 0;
+    var sellingPrice = row.custom_selling_price || 0;
+
+    if (sellingPrice > mrp) {
+      frappe.msgprint(
+        "Selling price cannot exceed MRP for item " + row.item_code
+      );
+      frappe.model.set_value(cdt, cdn, "custom_selling_price", mrp);
+      frappe.model.set_value(cdt, cdn, "custom_margin", 0); // Set margin to 0
+    }
+  },
 });
 
 function calSellingPrice(row) {
@@ -271,6 +314,18 @@ function calSellingPrice(row) {
   ).toFixed(2);
 
   row.custom_selling_price = selling_price_wo_taxes;
+
+  // Check if selling price exceeds MRP after setting margin
+  var mrp = row.custom_mrp || 0;
+  var sellingPrice = row.custom_selling_price || 0;
+
+  if (sellingPrice > mrp) {
+    frappe.msgprint(
+      "Selling price cannot exceed MRP for item " + row.item_code
+    );
+    row.custom_selling_price = mrp;
+    row.custom_margin = 0; // Set margin to 0
+  }
 
   cur_frm.fields_dict["items"].grid.refresh();
 }

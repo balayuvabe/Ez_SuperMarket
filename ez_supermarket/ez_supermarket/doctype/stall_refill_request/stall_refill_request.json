@@ -1,12 +1,13 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "format:STKREF--{DD}-{MM}-{YY}-{####}",
+ "autoname": "naming_series:",
  "creation": "2023-12-21 15:00:33.530022",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
   "general_details_section",
+  "naming_series",
   "posting_date",
   "request_raised_by",
   "column_break_aadn",
@@ -84,6 +85,14 @@
    "in_list_view": 1,
    "label": "Start Time",
    "reqd": 1
+  },
+  {
+   "default": "STKREF-.DD.-.MM.-.YY.-.####",
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Naming Series",
+   "options": "STKREF-.DD.-.MM.-.YY.-.####",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
@@ -94,11 +103,11 @@
    "link_fieldname": "custom_reference_document"
   }
  ],
- "modified": "2024-02-08 17:37:23.440380",
+ "modified": "2024-02-12 14:22:59.850864",
  "modified_by": "Administrator",
  "module": "Ez-Supermarket",
  "name": "Stall Refill Request",
- "naming_rule": "Expression",
+ "naming_rule": "By \"Naming Series\" field",
  "owner": "Administrator",
  "permissions": [
   {
