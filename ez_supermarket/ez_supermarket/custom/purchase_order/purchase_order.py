@@ -81,8 +81,18 @@ def get_qty_sold_and_purchased_last_two_months(item_code):
             AND pi.posting_date BETWEEN %s AND %s
             AND pi.docstatus = 1
     """, (item_code, first_day_of_current_month, last_day_of_current_month), as_dict=True)[0].get('total_qty') or 0
+    
+    lead_time, item_name = frappe.db.get_value("Item", item_code,["custom_purchase_lead_time_in_days", "item_name"])
+    average_sales = (qty_sold_last_month + qty_sold_current_month + qty_sold_previous_month ) / 3
+    average_purchase = (qty_purchased_last_month + qty_purchased_previous_month + qty_purchased_current_month) / 3
+    average_3m = f"{round(average_purchase, 2)} / {round(average_sales, 2)}"
+    if lead_time:
+        flt_lead_time = float(lead_time)
+        eoq = average_sales*(flt_lead_time/30+1)
+    else:
+        eoq = 0
 
-    return qty_sold_last_month, qty_sold_previous_month, qty_sold_current_month, qty_purchased_last_month, qty_purchased_previous_month, qty_purchased_current_month
+    return qty_sold_last_month, qty_sold_previous_month, qty_sold_current_month, qty_purchased_last_month, qty_purchased_previous_month, qty_purchased_current_month, average_3m, eoq, item_name
 
 
 
@@ -107,12 +117,12 @@ def fetch_supplier_items(supplier):
         
         stall_qty, store_rooms_qty = get_item_current_balance(item_code)
         
-        last_month_sales, previous_last_month_sales, current_month_sales, last_month_purchase, previous_last_month_purchase, current_month_purchase = get_qty_sold_and_purchased_last_two_months(item_code)
+        last_month_sales, previous_last_month_sales, current_month_sales, last_month_purchase, previous_last_month_purchase, current_month_purchase, average_3m, eoq, item_name = get_qty_sold_and_purchased_last_two_months(item_code)
         
         # if item.last_purchase_rate == 0:
         #     last_purchase_rate = get_last_purchase_rate_from_item_price(item_code)
         # else:
-        #     last_purchase_rate = item.last_purchase_rate
+        #     last_purchase_rate = item.last_purchase_ratem
                                                             
         items.append({
             "item_code": item_code,
@@ -130,10 +140,12 @@ def fetch_supplier_items(supplier):
             "custom_last_month_purchase": last_month_purchase,
             "custom_previous_last_month_purchase": previous_last_month_purchase,
             "custom_current_month_purchase": current_month_purchase,
+            "custom_average_purchase_sales": average_3m,
+            "custom_eoq": eoq,
             "custom_tax": item.custom_tax_rate,
             "custom_mrp": item.custom_mrp,
         })
-        
+
     return items
 def get_last_purchase_rate_from_item_price(item_code):
     item_price = frappe.get_all("Item Price",

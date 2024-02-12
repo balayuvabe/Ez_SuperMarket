@@ -64,6 +64,74 @@ frappe.ui.form.on("Purchase Order", {
     });
   },
 });
+
+frappe.ui.form.on("Purchase Order Item", {
+  item_code: (frm, cdt, cdn) =>{
+    add_item(frm, cdt, cdn)
+  },
+  items_remove: (frm, cdt, cdn) =>{
+    let remove = 1
+    add_item(frm, cdt, cdn, remove)
+  },
+});
+
+async function add_item(frm, cdt, cdn, remove) {
+  let items_p = [];
+  let items_s = [];
+  let child_table = locals[cdt][cdn];
+  if (frm.doc.items) {
+    for (let r of frm.doc.items) {
+      if (r.item_code) {
+        let item = r.item_code;
+        try {
+          let res = await new Promise((resolve, reject) => {
+            frappe.call({
+              method: "ez_supermarket.ez_supermarket.doctype.history_table.history_table.get_item_details",
+              args: { item_list: item },
+              callback: function (r) {
+                if (r.message) {
+                  console.log(r.message);
+                  items_p.push({
+                    "item_code": item,
+                    "item_name": r.message[8],
+                    "current_month": r.message[5],
+                    "last_month": r.message[3],
+                    "late_last_month": r.message[4],
+                  });
+                  if(remove == null){
+                    if(child_table.custom_average_purchase_sales == null){
+                    child_table.custom_average_purchase_sales = r.message[6];}
+                    if(child_table.custom_eoq == null){
+                      child_table.custom_eoq = r.message[7] || 0;
+                    }
+                  }
+                  frm.refresh_field("items")
+                  items_s.push({
+                    "item_code": item,
+                    "item_name": r.message[8],
+                    "current_month": r.message[2],
+                    "last_month": r.message[0],
+                    "late_last_month": r.message[1],
+                  });
+                  resolve();
+                } else {
+                  reject();
+                }
+              },
+            });
+          });
+        } catch (error) {
+          console.error("Error fetching item details");
+        }
+      }
+    }
+    frm.set_value("custom_purchase_history_table", items_p);
+    frm.set_value("custom_sales_history_table", items_s);
+    frm.refresh_field("custom_purchase_history_table");
+    frm.refresh_field("custom_sales_history_table");
+  }
+}
+
 function checkPrices(frm) {
   var items = frm.doc.items || [];
   var rows = [];
@@ -195,6 +263,8 @@ function fetchSupplierItems(frm) {
               item.custom_previous_last_month_sales +
               item.custom_current_month_sales_2) /
             3;
+          child.custom_average_purchase_sales = item.custom_average_purchase_sales;
+          child.custom_eoq = item.custom_eoq;
           child.custom_average_purchase_last_3_months =
             (item.custom_current_month_purchase +
               item.custom_last_month_purchase +
