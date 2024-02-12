@@ -22,7 +22,6 @@
   "section_break_8",
   "quantity",
   "column_break_20",
-  "total",
   "additional_information_section",
   "remarks",
   "approved_by",
@@ -34,12 +33,6 @@
   "amended_from"
  ],
  "fields": [
-  {
-   "fieldname": "naming_series",
-   "fieldtype": "Select",
-   "label": "Naming Series",
-   "read_only": 1
-  },
   {
    "fieldname": "company",
    "fieldtype": "Link",
@@ -123,14 +116,6 @@
    "fieldtype": "Column Break"
   },
   {
-   "fieldname": "total",
-   "fieldtype": "Currency",
-   "in_list_view": 1,
-   "label": "Total",
-   "precision": "2",
-   "read_only": 1
-  },
-  {
    "fieldname": "additional_information_section",
    "fieldtype": "Section Break",
    "label": "Additional Information"
@@ -191,12 +176,19 @@
    "options": "Expense Entry",
    "print_hide": 1,
    "read_only": 1
+  },
+  {
+   "default": "EXP-.DD.-.MM.-.YY.-.####",
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Naming Series",
+   "options": "EXP-.DD.-.MM.-.YY.-.####"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-02-09 14:58:49.383363",
+ "modified": "2024-02-12 14:09:28.843556",
  "modified_by": "Administrator",
  "module": "Ez-Supermarket",
  "name": "Expense Entry",

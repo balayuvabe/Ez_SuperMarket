@@ -155,27 +155,27 @@ function fetchSupplierItems(frm) {
 
   // console.log("Fetching supplier items for:", supplier);
 
+  // Call the server-side function to fetch supplier items
   frappe.call({
     method:
       "ez_supermarket.ez_supermarket.custom.purchase_order.purchase_order.fetch_supplier_items",
     args: {
-      supplier: supplier,
+      supplier: frm.doc.supplier,
     },
     callback: function (r) {
-      // console.log("Response from server:", r);
-
       if (r.message && r.message.length > 0) {
         // Clear existing rows
         frm.doc.items = [];
 
         // Add fetched items
         $.each(r.message, function (i, item) {
-          // console.log("Processing item:", item);
-
           var child = frm.add_child("items");
           child.item_code = item.item_code;
-          frm.script_manager.trigger("item_code", child.doctype, child.name);
 
+          // Trigger the item_code event asynchronously
+          triggerItemCode(child).catch((error) => {
+            console.error("An error occurred:", error);
+          });
           child.buying_price_list = frm.doc.buying_price_list;
           child.custom_available_qty = item.custom_available_qty;
           child.custom_last_month_sales = item.custom_last_month_sales;
@@ -223,6 +223,16 @@ function fetchSupplierItems(frm) {
         frappe.msgprint("No items found for supplier.");
       }
     },
+  });
+}
+function triggerItemCode(child) {
+  return new Promise((resolve, reject) => {
+    try {
+      cur_frm.script_manager.trigger("item_code", child.doctype, child.name);
+      resolve();
+    } catch (error) {
+      reject(error);
+    }
   });
 }
 
