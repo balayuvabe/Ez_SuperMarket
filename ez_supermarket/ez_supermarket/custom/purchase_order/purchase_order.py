@@ -91,15 +91,7 @@ def get_qty_sold_and_purchased_last_two_months(item_code):
         eoq = average_sales*(flt_lead_time/30+1)
     else:
         eoq = 0
-    average_purchase = frappe.db.sql("""
-        SELECT SUM(pii.rate) as total_price
-        FROM `tabPurchase Invoice` pi
-        JOIN `tabPurchase Invoice Item` pii ON pi.name = pii.parent
-        WHERE pii.item_code = %s
-            AND pi.posting_date BETWEEN %s AND %s
-            AND pi.docstatus = 1
-        """, (item_code, first_day_of_current_month,last_day_of_month_before_last), as_dict=True)[0].get('total_price') or 0
-
+    average_purchase = average_purcahse_price(item_code)
     return qty_sold_last_month, qty_sold_previous_month, qty_sold_current_month, qty_purchased_last_month, qty_purchased_previous_month, qty_purchased_current_month, average_3m, eoq, item_name, average_purchase
 
 
@@ -254,3 +246,18 @@ def check_supplier_bill_no(supplier, custom_suppliers_bill_no):
     }, 'name')
 
     return {'existing_po': existing_po}
+
+@frappe.whitelist()
+def average_purcahse_price(item_code):
+    amount = []
+    rate = 0
+    average = 0
+    doc = frappe.get_list("Purchase Invoice Item", filters={"item_code": item_code,"parenttype": "Purchase Invoice", "rate": ["!=", 0]})
+    if len(doc) > 0:
+        for i in doc:
+            doc_open = frappe.get_doc("Purchase Invoice Item",i.name)
+            rate += doc_open.rate 
+            amount.append({doc_open})
+        length = len(amount)
+        average = rate / length
+    return average
