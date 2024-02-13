@@ -153,8 +153,6 @@ function fetchSupplierItems(frm) {
   var schedule_date = frappe.datetime.add_days(frm.doc.schedule_date, 12);
   frm.set_value("schedule_date", schedule_date);
 
-  // console.log("Fetching supplier items for:", supplier);
-
   // Call the server-side function to fetch supplier items
   frappe.call({
     method:
@@ -173,9 +171,34 @@ function fetchSupplierItems(frm) {
           child.item_code = item.item_code;
 
           // Trigger the item_code event asynchronously
-          triggerItemCode(child).catch((error) => {
-            console.error("An error occurred:", error);
-          });
+          triggerItemCode(child).catch((error) => {});
+          // Assuming `item` is the object you're working with
+          var last_month_sales_qty = item.custom_last_month_sales
+            ? parseFloat(item.custom_last_month_sales.split(" / ")[0])
+            : 0;
+          var previous_last_month_sales_qty =
+            item.custom_previous_last_month_sales
+              ? parseFloat(
+                  item.custom_previous_last_month_sales.split(" / ")[0]
+                )
+              : 0;
+          var current_month_sales_qty = item.custom_current_month_sales_2
+            ? parseFloat(item.custom_current_month_sales_2.split(" / ")[0])
+            : 0;
+
+          var last_month_purchase_qty = item.custom_last_month_purchase
+            ? parseFloat(item.custom_last_month_purchase.split(" / ")[0])
+            : 0;
+          var previous_last_month_purchase_qty =
+            item.custom_previous_last_month_purchase
+              ? parseFloat(
+                  item.custom_previous_last_month_purchase.split(" / ")[0]
+                )
+              : 0;
+          var current_month_purchase_qty = item.custom_current_month_purchase
+            ? parseFloat(item.custom_current_month_purchase.split(" / ")[0])
+            : 0;
+
           child.buying_price_list = frm.doc.buying_price_list;
           child.custom_available_qty = item.custom_available_qty;
           child.custom_last_month_sales = item.custom_last_month_sales;
@@ -191,28 +214,30 @@ function fetchSupplierItems(frm) {
           child.custom_previous_last_month_purchase =
             item.custom_previous_last_month_purchase;
           child.custom_average_sales_last_3_months =
-            (item.custom_last_month_sales +
-              item.custom_previous_last_month_sales +
-              item.custom_current_month_sales_2) /
+            (last_month_sales_qty +
+              previous_last_month_sales_qty +
+              current_month_sales_qty) /
             3;
+
           child.custom_average_purchase_last_3_months =
-            (item.custom_current_month_purchase +
-              item.custom_last_month_purchase +
-              item.custom_previous_last_month_purchase) /
+            (current_month_purchase_qty +
+              last_month_purchase_qty +
+              previous_last_month_purchase_qty) /
             3;
+
           // Calculate and set custom_forecasted_sales and custom_forecasted_purchase using exponential smoothing
           var alpha = 0.2; // Define the smoothing factor
           child.custom_forecasted_sales_quantity =
             calculate_exponential_smoothing(
-              item.custom_current_month_sales_2,
-              item.custom_last_month_sales,
+              current_month_sales_qty,
+              last_month_sales_qty,
               alpha // Pass the smoothing factor to the function
             );
 
           child.custom_forecasted_purchase_quantity =
             calculate_exponential_smoothing(
-              item.custom_current_month_purchase,
-              item.custom_last_month_purchase,
+              current_month_purchase_qty,
+              last_month_purchase_qty,
               alpha // Pass the smoothing factor to the function
             );
         });
@@ -237,9 +262,6 @@ function triggerItemCode(child) {
 }
 
 function calculate_exponential_smoothing(yt, st_minus_1, alpha) {
-  console.log("yt:", yt);
-  console.log("st_minus_1:", st_minus_1);
-  console.log("alpha:", alpha);
   // Calculate the forecast using exponential smoothing
   const forecast = alpha * yt + (1 - alpha) * st_minus_1;
 
