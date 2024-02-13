@@ -88,30 +88,37 @@ async function add_item(frm, cdt, cdn, remove) {
             frappe.call({
               method: "ez_supermarket.ez_supermarket.doctype.history_table.history_table.get_item_details",
               args: { item_list: item },
-              callback: function (r) {
-                if (r.message) {
-                  console.log(r.message);
+              callback: function (res) {
+                if (res.message) {
+                  console.log(res.message[9])
                   items_p.push({
                     "item_code": item,
-                    "item_name": r.message[8],
-                    "current_month": r.message[5],
-                    "last_month": r.message[3],
-                    "late_last_month": r.message[4],
+                    "item_name": res.message[8],
+                    "current_month": res.message[5],
+                    "last_month": res.message[3],
+                    "late_last_month": res.message[4],
                   });
                   if(remove == null){
-                    if(child_table.custom_average_purchase_sales == null){
-                    child_table.custom_average_purchase_sales = r.message[6];}
-                    if(child_table.custom_eoq == null){
-                      child_table.custom_eoq = r.message[7] || 0;
+                    if(child_table.custom_average_purchase_sales == null && child_table.idx == r.idx){
+                      child_table.custom_average_purchase_sales = res.message[2]+" / "+res.message[0]+" / "+res.message[1]
+                    }
+                    if(child_table.custom_average_purchase_price == null && child_table.idx == r.idx){
+                      child_table.custom_average_purchase_price = res.message[9] || 0;
+                    }
+                    if(child_table.custom_purchase_history == null && child_table.idx == r.idx){
+                      child_table.custom_purchase_history = res.message[5]+" / "+res.message[3]+" / "+res.message[4];
+                    }
+                    if(child_table.custom_eoq == null && child_table.idx == r.idx){
+                      child_table.custom_eoq = res.message[7] || 0;
                     }
                   }
                   frm.refresh_field("items")
                   items_s.push({
                     "item_code": item,
-                    "item_name": r.message[8],
-                    "current_month": r.message[2],
-                    "last_month": r.message[0],
-                    "late_last_month": r.message[1],
+                    "item_name": res.message[8],
+                    "current_month": res.message[2],
+                    "last_month": res.message[0],
+                    "late_last_month": res.message[1],
                   });
                   resolve();
                 } else {
@@ -263,7 +270,8 @@ function fetchSupplierItems(frm) {
               item.custom_previous_last_month_sales +
               item.custom_current_month_sales_2) /
             3;
-          child.custom_average_purchase_sales = item.custom_average_purchase_sales;
+          child.custom_average_purchase_sales = item.custom_current_month_sales_2+" / "+item.custom_last_month_sales+" / "+item.custom_previous_last_month_sales;
+          child.custom_purchase_history = item.custom_current_month_purchase+" / "+item.custom_last_month_purchase+" / "+item.custom_previous_last_month_purchase;
           child.custom_eoq = item.custom_eoq;
           child.custom_average_purchase_last_3_months =
             (item.custom_current_month_purchase +

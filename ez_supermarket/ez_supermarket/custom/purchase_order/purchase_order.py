@@ -91,8 +91,16 @@ def get_qty_sold_and_purchased_last_two_months(item_code):
         eoq = average_sales*(flt_lead_time/30+1)
     else:
         eoq = 0
+    average_purchase = frappe.db.sql("""
+        SELECT SUM(pii.rate) as total_price
+        FROM `tabPurchase Invoice` pi
+        JOIN `tabPurchase Invoice Item` pii ON pi.name = pii.parent
+        WHERE pii.item_code = %s
+            AND pi.posting_date BETWEEN %s AND %s
+            AND pi.docstatus = 1
+        """, (item_code, first_day_of_current_month,last_day_of_month_before_last), as_dict=True)[0].get('total_price') or 0
 
-    return qty_sold_last_month, qty_sold_previous_month, qty_sold_current_month, qty_purchased_last_month, qty_purchased_previous_month, qty_purchased_current_month, average_3m, eoq, item_name
+    return qty_sold_last_month, qty_sold_previous_month, qty_sold_current_month, qty_purchased_last_month, qty_purchased_previous_month, qty_purchased_current_month, average_3m, eoq, item_name, average_purchase
 
 
 
@@ -117,7 +125,7 @@ def fetch_supplier_items(supplier):
         
         stall_qty, store_rooms_qty = get_item_current_balance(item_code)
         
-        last_month_sales, previous_last_month_sales, current_month_sales, last_month_purchase, previous_last_month_purchase, current_month_purchase, average_3m, eoq, item_name = get_qty_sold_and_purchased_last_two_months(item_code)
+        last_month_sales, previous_last_month_sales, current_month_sales, last_month_purchase, previous_last_month_purchase, current_month_purchase, average_3m, eoq, item_name, average_purchase = get_qty_sold_and_purchased_last_two_months(item_code)
         
         # if item.last_purchase_rate == 0:
         #     last_purchase_rate = get_last_purchase_rate_from_item_price(item_code)
@@ -142,6 +150,7 @@ def fetch_supplier_items(supplier):
             "custom_current_month_purchase": current_month_purchase,
             "custom_average_purchase_sales": average_3m,
             "custom_eoq": eoq,
+            "custom_average_purchase_price": average_purchase,
             "custom_tax": item.custom_tax_rate,
             "custom_mrp": item.custom_mrp,
         })
