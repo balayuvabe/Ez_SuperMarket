@@ -59,9 +59,9 @@ frappe.ui.form.on("Purchase Order", {
         fetchSupplierItems(frm);
       }
     );
-    frm.add_custom_button(__("Check Prices"), function () {
-      checkPrices(frm);
-    });
+    // frm.add_custom_button(__("Check Prices"), function () {
+    //   checkPrices(frm);
+    // });
   },
 });
 function checkPrices(frm) {
@@ -213,6 +213,10 @@ function fetchSupplierItems(frm) {
           child.custom_last_month_purchase = item.custom_last_month_purchase;
           child.custom_previous_last_month_purchase =
             item.custom_previous_last_month_purchase;
+          child.custom_sales_history = item.custom_sales_history;
+          child.custom_purchase_history = item.custom_purchase_history;
+          child.custom_purchase_rate_history =
+            item.custom_purchase_rate_history;
           child.custom_average_sales_last_3_months =
             (last_month_sales_qty +
               previous_last_month_sales_qty +
