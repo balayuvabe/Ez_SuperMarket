@@ -60,12 +60,7 @@ def fetch_supplier_items(supplier):
                     "custom_current_month_purchase": f"{current_month_purchase['total_qty'] if current_month_purchase['total_qty'] is not None else 0} {item.stock_uom} / Rs {current_month_purchase['avg_rate'] if current_month_purchase['avg_rate'] is not None else 0}",
                     "custom_tax": item.custom_tax_rate if item.custom_tax_rate is not None else 0,
                     "custom_mrp": item.custom_mrp if item.custom_mrp is not None else 0,
-                    "custom_sales_history": f"{current_month_sales['total_qty'] if current_month_sales['total_qty'] is not None else 0} / {last_month_purchase['total_qty'] if last_month_purchase['total_qty'] is not None else 0} / {previous_last_month_purchase['total_qty']}",
-                    "custom_purchase_history": f"{current_month_purchase['total_qty'] if current_month_purchase['total_qty'] is not None else 0} / {last_month_purchase['total_qty'] if last_month_purchase['total_qty'] is not None else 0} / {previous_last_month_purchase['total_qty']}",
-                    "custom_purchase_rate_history": f"{current_month_purchase['avg_rate'] if current_month_purchase['avg_rate'] is not None else 0} / {last_month_purchase['avg_rate'] if last_month_purchase['avg_rate'] is not None else 0} / {previous_last_month_purchase['avg_rate']}",
-            }
-                
-                )
+                })
 
     return items
 
