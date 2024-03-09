@@ -136,11 +136,20 @@ doc_events = {
         "on_submit": "ez_supermarket.ez_supermarket.custom.purchase_receipt.purchase_receipt.on_submit",
         # "on_submit": "ez_supermarket.ez_supermarket.custom.purchase_receipt.purchase_receipt.update_item_lead_time",
         # "before_save": "ez_supermarket.ez_supermarket.custom.purchase_receipt.purchase_receipt.update_item_lead_time",
-        # "before_submit" : "ez_supermarket.ez_supermarket.custom.purchase_receipt.purchase_receipt.before_submit"
+        "before_submit" : "ez_supermarket.ez_supermarket.custom.purchase_receipt.purchase_receipt.update_item_fields"
+    },
+    "Quick Purchase": {
+         "on_submit": "ez_supermarket.ez_supermarket.doctype.quick_purchase.quick_purchase.on_submit"
+    },
+    "Expense Entry": {
+        "on_update": "ez_supermarket.ez_supermarket.doctype.expense_entry.expense_entry.setup"
     },
     "Stock Adjust":{
         "on_submit": "ez_supermarket.ez_supermarket.doctype.stock_adjust.stock_adjust.on_submit"
-    }
+    },
+    "Purchase Master": {
+         "on_submit": "ez_supermarket.ez_supermarket.doctype.purchase_master.purchase_master.on_submit"
+    },
 }
 # doc_events = {
 #	"*": {
@@ -249,8 +258,8 @@ doc_events = {
 
 fixtures = [
     "Workflow State", "Workflow Action Master",
-    {"dt": "Workflow", "filters": [["name", "=", "Purchase & Price Update"]]},
-    {"dt": "Workflow", "filters": [["name", "in", ["Purchase & Price Update", "Supplier Approval"]]]},
+    # {"dt": "Workflow", "filters": [["name", "=", "Purchase & Price Update"]]},
+    {"dt": "Workflow", "filters": [["name", "in", ["Purchase & Price Update", "Supplier Approval", "Expense Entry Approval", "Purchase Master Workflow", "Procurement Master"]]]},
     {"dt": "Custom Field", "filters": [["module", "=", "Ez-Supermarket"]]},
-    {"dt": "Workflow", "filters": [["document_type", "=", "Procurement Master"]]}
+    # {"dt": "Workflow", "filters": [["document_type", "=", "Procurement Master"]]}
 ]

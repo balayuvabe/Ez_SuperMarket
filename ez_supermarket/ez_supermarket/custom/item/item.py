@@ -43,3 +43,4 @@ def apply_tax_template(doc_json):
             doc["taxes"].append(tax_row_out_state)
 
     return doc
+

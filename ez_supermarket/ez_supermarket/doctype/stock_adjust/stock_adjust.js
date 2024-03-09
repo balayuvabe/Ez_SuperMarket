@@ -429,28 +429,31 @@ frappe.ui.form.on("Stock Adjust", {
 // });
 frappe.ui.form.on("Stock Adjust Details", {
   item_code: function (frm, cdt, cdn) {
-    var row = locals[cdt][cdn];
-
-    // Check if both t_warehouse and item_code are selected
-    if (row.t_warehouse && row.item_code) {
-      frappe.call({
-        method:
-          "ez_supermarket.ez_supermarket.doctype.stock_adjust.stock_adjust.get_available_qty",
-        args: {
-          warehouse: row.t_warehouse,
-          item_code: row.item_code,
-        },
-        callback: function (r) {
-          if (r.message) {
-            frappe.model.set_value(cdt, cdn, "total_qty_available", r.message);
-          }
-        },
-      });
-    }
+    updateAvailableQty(frm, cdt, cdn);
   },
 
   t_warehouse: function (frm, cdt, cdn) {
-    // Reset available_qty when t_warehouse changes
-    frappe.model.set_value(cdt, cdn, "total_qty_available", 0);
+    updateAvailableQty(frm, cdt, cdn);
   },
 });
+
+function updateAvailableQty(frm, cdt, cdn) {
+  var row = locals[cdt][cdn];
+
+  // Check if both t_warehouse and item_code are selected
+  if (row.t_warehouse && row.item_code) {
+    frappe.call({
+      method:
+        "ez_supermarket.ez_supermarket.doctype.stock_adjust.stock_adjust.get_available_qty",
+      args: {
+        warehouse: row.t_warehouse,
+        item_code: row.item_code,
+      },
+      callback: function (r) {
+        if (r.message) {
+          frappe.model.set_value(cdt, cdn, "available_qty", r.message);
+        }
+      },
+    });
+  }
+}

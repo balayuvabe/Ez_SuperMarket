@@ -193,7 +193,7 @@
    "hidden": 0,
    "is_query_report": 0,
    "label": "Quick",
-   "link_count": 2,
+   "link_count": 3,
    "link_type": "DocType",
    "onboard": 0,
    "type": "Card Break"
@@ -201,9 +201,9 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "Quick Purchase",
+   "label": "Purchase Master",
    "link_count": 0,
-   "link_to": "Quick Purchase",
+   "link_to": "Purchase Master",
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
@@ -217,9 +217,19 @@
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Purchase Master",
+   "link_count": 0,
+   "link_to": "Purchase Master",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
   }
  ],
- "modified": "2024-02-12 11:55:19.326870",
+ "modified": "2024-03-09 15:00:55.147428",
  "modified_by": "Administrator",
  "module": "Ez-Supermarket",
  "name": "Supermarket",

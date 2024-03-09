@@ -11,7 +11,7 @@ function update_totals(frm, cdt, cdn) {
     total += items.amount;
     quantity += 1;
   });
-  frm.set_value("total", total);
+  frm.set_value("total_amount", total);
   refresh_field("total");
   frm.set_value("quantity", quantity);
   refresh_field("quantity");
@@ -117,4 +117,11 @@ frappe.ui.form.on("Expense Entry", {
       };
     });
   },
+  // grand_total: function (frm) {
+  //   let total_amount = 0;
+  //   frm.doc.items.forEach(function (item) {
+  //     total_amount += item.amount;
+  //   });
+  //   frm.set_value("grand_total", total_amount);
+  // },
 });

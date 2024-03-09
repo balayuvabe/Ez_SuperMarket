@@ -17,7 +17,7 @@
   "select_the_features_you_need_section",
   "stall_refill_request",
   "clients_request",
-  "quick_purchase",
+  "purchase_master",
   "expense_entry",
   "stock_adjust"
  ],
@@ -89,12 +89,6 @@
   },
   {
    "default": "0",
-   "fieldname": "quick_purchase",
-   "fieldtype": "Check",
-   "label": "Quick Purchase"
-  },
-  {
-   "default": "0",
    "fieldname": "clients_request",
    "fieldtype": "Check",
    "label": "Clients Request"
@@ -110,12 +104,18 @@
    "fieldname": "expense_entry",
    "fieldtype": "Check",
    "label": "Expense Entry"
+  },
+  {
+   "default": "0",
+   "fieldname": "purchase_master",
+   "fieldtype": "Check",
+   "label": "Purchase Master"
   }
  ],
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2024-02-09 15:29:38.539587",
+ "modified": "2024-03-08 14:09:10.755599",
  "modified_by": "Administrator",
  "module": "Ez-Supermarket",
  "name": "Yb Supermarket Settings",

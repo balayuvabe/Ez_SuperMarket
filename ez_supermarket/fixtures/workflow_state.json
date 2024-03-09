@@ -3,6 +3,69 @@
   "docstatus": 0,
   "doctype": "Workflow State",
   "icon": "",
+  "modified": "2024-02-26 13:48:21.750906",
+  "name": "Requested",
+  "style": "",
+  "workflow_state_name": "Requested"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2024-03-08 12:09:49.813390",
+  "name": "Send to Supplier",
+  "style": "",
+  "workflow_state_name": "Send to Supplier"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2024-03-08 12:21:57.456177",
+  "name": "Sent to Supplier",
+  "style": "Info",
+  "workflow_state_name": "Sent to Supplier"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2024-03-08 12:10:48.030308",
+  "name": "Material Received",
+  "style": "",
+  "workflow_state_name": "Material Received"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2024-03-08 12:23:42.640353",
+  "name": "Purchase Completed",
+  "style": "Success",
+  "workflow_state_name": "Purchase Completed"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2024-03-08 12:12:22.855932",
+  "name": "Awaiting Response",
+  "style": "",
+  "workflow_state_name": "Awaiting Response"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2024-03-08 12:23:32.657035",
+  "name": "Check Details",
+  "style": "Primary",
+  "workflow_state_name": "Check Details"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
   "modified": "2024-01-10 14:44:55.265585",
   "name": "QC Completed",
   "style": "",
