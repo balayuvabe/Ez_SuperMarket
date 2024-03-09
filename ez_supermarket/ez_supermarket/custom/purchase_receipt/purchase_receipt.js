@@ -55,7 +55,7 @@ frappe.ui.form.on("Purchase Receipt", {
   },
   validate: function (frm) {
     $.each(frm.doc.items || [], function (i, d) {
-      if (d.custom_selling_price > d.custom_mrp) {
+      if (d.custom_mrp > 0 && d.custom_selling_price > d.custom_mrp) {
         frappe.validated = false;
         frappe.msgprint(
           "Row " +
@@ -124,16 +124,6 @@ function showItemDialog(frm) {
           },
         },
         {
-          fieldname: "mrp",
-          label: "MRP",
-          fieldtype: "Currency",
-          default: frm.doc.items[currentIndex].custom_mrp,
-          description: "MRP will be updated if you change it here",
-          read_only: function () {
-            return !dialog.get_value("update_mrp");
-          },
-        },
-        {
           fieldtype: "Check",
           fieldname: "update_mrp",
           label: "Update MRP",
@@ -145,7 +135,16 @@ function showItemDialog(frm) {
             );
           },
         },
-
+        {
+          fieldname: "mrp",
+          label: "MRP",
+          fieldtype: "Currency",
+          default: frm.doc.items[currentIndex].custom_mrp,
+          description: "MRP will be updated if you change it here",
+          read_only: function () {
+            return !dialog.get_value("update_mrp");
+          },
+        },
         {
           fieldname: "selling_price_wo_taxes",
           label: "Selling Price without Taxes",
@@ -189,14 +188,16 @@ function showItemDialog(frm) {
       ],
       primary_action: function () {
         var values = dialog.get_values();
-
         var mrp = frm.doc.items[currentIndex].custom_mrp;
         var sellingPriceWithTaxes = values.selling_price_with_taxes || 0;
         if (sellingPriceWithTaxes > mrp) {
           frappe.msgprint("Selling price cannot exceed <b>MRP</b>");
           return;
         }
-
+        if (values.update_mrp) {
+          // Update the custom_mrp field in the current item
+          frm.doc.items[currentIndex].custom_mrp = values.mrp;
+        }
         // Update the current item with the new values
         frm.doc.items[currentIndex].item_code = values.item_code;
         frm.doc.items[currentIndex].qty = values.received_qty;
@@ -207,7 +208,11 @@ function showItemDialog(frm) {
         frm.doc.items[currentIndex].custom_selling_price =
           values.selling_price_wo_taxes;
 
+        // Refresh the grid to reflect the changes
         frm.fields_dict["items"].grid.refresh();
+
+        // Mark the form as clean
+        frm.dirty(false);
 
         // Increment the index for the next item
         currentIndex++;
@@ -217,7 +222,7 @@ function showItemDialog(frm) {
           // If yes, update the dialog content again
           dialog.set_values({
             item_code: frm.doc.items[currentIndex].item_code,
-            mrp_rate: frm.doc.items[currentIndex].custom_mrp,
+            mrp: frm.doc.items[currentIndex].custom_mrp,
             buying_price: frm.doc.items[currentIndex].rate,
             margin: "",
             tax_rate: frm.doc.items[currentIndex].custom_tax,
@@ -233,6 +238,7 @@ function showItemDialog(frm) {
           frappe.msgprint("Prices updated successfully");
         }
       },
+
       primary_action_label: __("Update"),
     });
     // Show the dialog
@@ -294,13 +300,15 @@ frappe.ui.form.on("Purchase Receipt Item", {
     var mrp = row.custom_mrp || 0;
     var sellingPrice = row.custom_selling_price || 0;
 
-    if (sellingPrice > mrp) {
+    if (mrp > 0 && sellingPrice > mrp) {
       frappe.msgprint(
         "Selling price cannot exceed MRP for item " + row.item_code
       );
       frappe.model.set_value(cdt, cdn, "custom_selling_price", mrp);
       frappe.model.set_value(cdt, cdn, "custom_margin", 0); // Set margin to 0
     }
+
+    calculateSellingPrice(row); // Call calculateSellingPrice after custom_selling_price is updated
   },
 });
 
@@ -319,7 +327,7 @@ function calSellingPrice(row) {
   var mrp = row.custom_mrp || 0;
   var sellingPrice = row.custom_selling_price || 0;
 
-  if (sellingPrice > mrp) {
+  if (mrp > 0 && sellingPrice > mrp) {
     frappe.msgprint(
       "Selling price cannot exceed MRP for item " + row.item_code
     );

@@ -2,7 +2,8 @@
  "actions": [],
  "allow_import": 1,
  "autoname": "naming_series:",
- "creation": "2013-05-21 16:16:39",
+ "creation": "2024-03-07 15:19:58.692379",
+ "default_view": "List",
  "doctype": "DocType",
  "document_type": "Document",
  "engine": "InnoDB",
@@ -11,18 +12,19 @@
   "title",
   "naming_series",
   "supplier",
+  "posting_date",
+  "posting_time",
+  "set_posting_time",
   "supplier_name",
   "company",
   "column_break_6",
-  "posting_date",
-  "posting_time",
-  "contact_display",
-  "set_posting_time",
-  "column_break1",
   "supplier_address",
   "address_display",
-  "contact_person",
-  "amended_from",
+  "email",
+  "column_break1",
+  "payment_made",
+  "mode_of_payment",
+  "cashbank_account",
   "currency_and_price_list",
   "currency",
   "conversion_rate",
@@ -89,26 +91,21 @@
   "other_charges_calculation",
   "pricing_rule_details",
   "pricing_rules",
-  "quality_check_tab",
-  "qc_posting_date",
-  "rejected_warehouse",
+  "column_break_nqfo",
   "column_break_pvmo",
-  "qc_status",
-  "inspection_type",
-  "section_break_hvqr",
-  "item_details",
-  "packaging_section",
-  "freshness_level",
-  "addition_description",
+  "column_break_wiwd",
+  "column_break_ndjz",
   "column_break_zgiw",
-  "total_weight",
-  "purchase_invoice_tab",
-  "supplier_invoice_details",
-  "bill_no",
+  "column_break_qnsv",
   "column_break_15",
-  "bill_date"
+  "amended_from"
  ],
  "fields": [
+  {
+   "fieldname": "purchase_order_tab",
+   "fieldtype": "Tab Break",
+   "label": "Purchase Order"
+  },
   {
    "allow_on_submit": 1,
    "default": "{supplier_name}",
@@ -120,14 +117,16 @@
    "print_hide": 1
   },
   {
+   "default": "PM-.DD./.MM./.YY.-.####",
    "fieldname": "naming_series",
    "fieldtype": "Select",
    "label": "Series",
    "no_copy": 1,
    "oldfieldname": "naming_series",
    "oldfieldtype": "Select",
-   "options": "ACC-PINV-.YYYY.-\nACC-PINV-RET-.YYYY.-",
+   "options": "PM-.DD./.MM./.YY.-.####",
    "print_hide": 1,
+   "read_only": 1,
    "reqd": 1,
    "set_only_once": 1
   },
@@ -156,12 +155,6 @@
    "read_only": 1
   },
   {
-   "fieldname": "column_break1",
-   "fieldtype": "Column Break",
-   "oldfieldtype": "Column Break",
-   "width": "50%"
-  },
-  {
    "fieldname": "company",
    "fieldtype": "Link",
    "in_standard_filter": 1,
@@ -169,6 +162,10 @@
    "options": "Company",
    "print_hide": 1,
    "remember_last_selected_value": 1
+  },
+  {
+   "fieldname": "column_break_6",
+   "fieldtype": "Column Break"
   },
   {
    "default": "Today",
@@ -179,16 +176,19 @@
    "oldfieldname": "posting_date",
    "oldfieldtype": "Date",
    "print_hide": 1,
+   "read_only_depends_on": "eval:doc.set_posting_time === 0 ",
    "reqd": 1,
    "search_index": 1
   },
   {
+   "default": "Now",
    "fieldname": "posting_time",
    "fieldtype": "Time",
    "label": "Posting Time",
    "no_copy": 1,
    "print_hide": 1,
    "print_width": "100px",
+   "read_only_depends_on": "eval:doc.set_posting_time === 0",
    "width": "100px"
   },
   {
@@ -200,47 +200,13 @@
    "print_hide": 1
   },
   {
-   "fieldname": "amended_from",
-   "fieldtype": "Link",
-   "ignore_user_permissions": 1,
-   "label": "Amended From",
-   "no_copy": 1,
-   "oldfieldname": "amended_from",
-   "oldfieldtype": "Link",
-   "options": "Purchase Invoice",
-   "print_hide": 1,
-   "read_only": 1
+   "fieldname": "column_break1",
+   "fieldtype": "Column Break",
+   "oldfieldtype": "Column Break",
+   "width": "50%"
   },
   {
-   "collapsible": 1,
-   "collapsible_depends_on": "bill_no",
-   "fieldname": "supplier_invoice_details",
-   "fieldtype": "Section Break",
-   "label": "Supplier Invoice"
-  },
-  {
-   "fieldname": "bill_no",
-   "fieldtype": "Data",
-   "label": "Supplier Invoice No",
-   "oldfieldname": "bill_no",
-   "oldfieldtype": "Data",
-   "print_hide": 1,
-   "search_index": 1
-  },
-  {
-   "fieldname": "column_break_15",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "bill_date",
-   "fieldtype": "Date",
-   "label": "Supplier Invoice Date",
-   "no_copy": 1,
-   "oldfieldname": "bill_date",
-   "oldfieldtype": "Date",
-   "print_hide": 1
-  },
-  {
+   "depends_on": "eval:doc.supplier",
    "fieldname": "supplier_address",
    "fieldtype": "Link",
    "label": "Select Supplier Address",
@@ -254,23 +220,11 @@
    "read_only": 1
   },
   {
-   "fieldname": "contact_person",
-   "fieldtype": "Link",
-   "in_global_search": 1,
-   "label": "Contact Person",
-   "options": "Contact",
-   "print_hide": 1
-  },
-  {
-   "fieldname": "contact_display",
-   "fieldtype": "Small Text",
-   "label": "Contact",
-   "read_only": 1
-  },
-  {
    "collapsible": 1,
+   "depends_on": "eval.doc.edit_currency_or_price_list == 1",
    "fieldname": "currency_and_price_list",
    "fieldtype": "Section Break",
+   "hidden": 1,
    "label": "Currency and Price List",
    "options": "fa fa-tag"
   },
@@ -291,6 +245,13 @@
    "oldfieldtype": "Currency",
    "precision": "9",
    "print_hide": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "use_transaction_date_exchange_rate",
+   "fieldtype": "Check",
+   "label": "Use Transaction Date Exchange Rate",
+   "read_only": 1
   },
   {
    "fieldname": "column_break2",
@@ -333,16 +294,28 @@
    "label": "Stock Related"
   },
   {
+   "fieldname": "scan_barcode",
+   "fieldtype": "Data",
+   "label": "Scan Barcode",
+   "options": "Barcode"
+  },
+  {
+   "fieldname": "col_break_warehouse",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "update_stock",
+   "fieldtype": "Check",
+   "label": "Update Stock"
+  },
+  {
    "depends_on": "update_stock",
    "fieldname": "set_warehouse",
    "fieldtype": "Link",
    "label": "Set Accepted Warehouse",
    "options": "Warehouse",
    "print_hide": 1
-  },
-  {
-   "fieldname": "col_break_warehouse",
-   "fieldtype": "Column Break"
   },
   {
    "fieldname": "items_section",
@@ -352,34 +325,14 @@
    "options": "fa fa-shopping-cart"
   },
   {
-   "fieldname": "scan_barcode",
-   "fieldtype": "Data",
-   "label": "Scan Barcode",
-   "options": "Barcode"
-  },
-  {
    "allow_bulk_edit": 1,
    "fieldname": "items",
    "fieldtype": "Table",
    "label": "Items",
    "oldfieldname": "entries",
    "oldfieldtype": "Table",
-   "options": "Procurement Master Item",
+   "options": "Purchase Master Item",
    "reqd": 1
-  },
-  {
-   "collapsible": 1,
-   "fieldname": "pricing_rule_details",
-   "fieldtype": "Section Break",
-   "hidden": 1,
-   "label": "Pricing Rules"
-  },
-  {
-   "fieldname": "pricing_rules",
-   "fieldtype": "Table",
-   "label": "Pricing Rule Detail",
-   "options": "Pricing Rule Detail",
-   "read_only": 1
   },
   {
    "fieldname": "section_break_26",
@@ -390,6 +343,18 @@
    "fieldtype": "Float",
    "label": "Total Quantity",
    "read_only": 1
+  },
+  {
+   "depends_on": "total_net_weight",
+   "fieldname": "total_net_weight",
+   "fieldtype": "Float",
+   "label": "Total Net Weight",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_50",
+   "fieldtype": "Column Break"
   },
   {
    "fieldname": "base_total",
@@ -431,10 +396,24 @@
    "read_only": 1
   },
   {
-   "depends_on": "total_net_weight",
-   "fieldname": "total_net_weight",
-   "fieldtype": "Float",
-   "label": "Total Net Weight",
+   "default": "0",
+   "depends_on": "apply_tds",
+   "fieldname": "tax_withholding_net_total",
+   "fieldtype": "Currency",
+   "hidden": 1,
+   "label": "Tax Withholding Net Total",
+   "no_copy": 1,
+   "options": "currency",
+   "read_only": 1
+  },
+  {
+   "depends_on": "apply_tds",
+   "fieldname": "base_tax_withholding_net_total",
+   "fieldtype": "Currency",
+   "hidden": 1,
+   "label": "Base Tax Withholding Net Total",
+   "no_copy": 1,
+   "options": "Company:company:default_currency",
    "print_hide": 1,
    "read_only": 1
   },
@@ -454,6 +433,19 @@
    "print_hide": 1
   },
   {
+   "fieldname": "taxes_and_charges",
+   "fieldtype": "Link",
+   "label": "Purchase Taxes and Charges Template",
+   "oldfieldname": "purchase_other_charges",
+   "oldfieldtype": "Link",
+   "options": "Purchase Taxes and Charges Template",
+   "print_hide": 1
+  },
+  {
+   "fieldname": "column_break_58",
+   "fieldtype": "Column Break"
+  },
+  {
    "fieldname": "shipping_rule",
    "fieldtype": "Link",
    "label": "Shipping Rule",
@@ -466,36 +458,12 @@
    "hide_border": 1
   },
   {
-   "fieldname": "taxes_and_charges",
-   "fieldtype": "Link",
-   "label": "Purchase Taxes and Charges Template",
-   "oldfieldname": "purchase_other_charges",
-   "oldfieldtype": "Link",
-   "options": "Purchase Taxes and Charges Template",
-   "print_hide": 1
-  },
-  {
    "fieldname": "taxes",
    "fieldtype": "Table",
    "label": "Purchase Taxes and Charges",
    "oldfieldname": "purchase_tax_details",
    "oldfieldtype": "Table",
    "options": "Purchase Taxes and Charges"
-  },
-  {
-   "collapsible": 1,
-   "fieldname": "sec_tax_breakup",
-   "fieldtype": "Section Break",
-   "label": "Tax Breakup"
-  },
-  {
-   "fieldname": "other_charges_calculation",
-   "fieldtype": "Long Text",
-   "label": "Taxes and Charges Calculation",
-   "no_copy": 1,
-   "oldfieldtype": "HTML",
-   "print_hide": 1,
-   "read_only": 1
   },
   {
    "fieldname": "totals",
@@ -564,45 +532,6 @@
    "options": "currency",
    "print_hide": 1,
    "read_only": 1
-  },
-  {
-   "collapsible": 1,
-   "fieldname": "section_break_44",
-   "fieldtype": "Section Break",
-   "label": "Additional Discount"
-  },
-  {
-   "default": "Grand Total",
-   "fieldname": "apply_discount_on",
-   "fieldtype": "Select",
-   "label": "Apply Additional Discount On",
-   "options": "\nGrand Total\nNet Total",
-   "print_hide": 1
-  },
-  {
-   "fieldname": "base_discount_amount",
-   "fieldtype": "Currency",
-   "label": "Additional Discount Amount (Company Currency)",
-   "options": "Company:company:default_currency",
-   "print_hide": 1,
-   "read_only": 1
-  },
-  {
-   "fieldname": "column_break_46",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "additional_discount_percentage",
-   "fieldtype": "Float",
-   "label": "Additional Discount Percentage",
-   "print_hide": 1
-  },
-  {
-   "fieldname": "discount_amount",
-   "fieldtype": "Currency",
-   "label": "Additional Discount Amount",
-   "options": "currency",
-   "print_hide": 1
   },
   {
    "fieldname": "section_break_49",
@@ -677,6 +606,12 @@
    "read_only": 1
   },
   {
+   "default": "0",
+   "fieldname": "use_company_roundoff_cost_center",
+   "fieldtype": "Check",
+   "label": "Use Company Default Round Off Cost Center"
+  },
+  {
    "depends_on": "eval:!doc.disable_rounded_total",
    "fieldname": "rounded_total",
    "fieldtype": "Currency",
@@ -726,144 +661,154 @@
    "label": "Disable Rounded Total"
   },
   {
-   "default": "0",
-   "depends_on": "apply_tds",
-   "fieldname": "tax_withholding_net_total",
-   "fieldtype": "Currency",
-   "hidden": 1,
-   "label": "Tax Withholding Net Total",
-   "no_copy": 1,
-   "options": "currency",
-   "read_only": 1
+   "collapsible": 1,
+   "fieldname": "section_break_44",
+   "fieldtype": "Section Break",
+   "label": "Additional Discount"
   },
   {
-   "depends_on": "apply_tds",
-   "fieldname": "base_tax_withholding_net_total",
+   "default": "Grand Total",
+   "fieldname": "apply_discount_on",
+   "fieldtype": "Select",
+   "label": "Apply Additional Discount On",
+   "options": "\nGrand Total\nNet Total",
+   "print_hide": 1
+  },
+  {
+   "fieldname": "base_discount_amount",
    "fieldtype": "Currency",
-   "hidden": 1,
-   "label": "Base Tax Withholding Net Total",
-   "no_copy": 1,
+   "label": "Additional Discount Amount (Company Currency)",
    "options": "Company:company:default_currency",
    "print_hide": 1,
    "read_only": 1
   },
   {
-   "fieldname": "column_break_6",
+   "fieldname": "column_break_46",
    "fieldtype": "Column Break"
   },
   {
-   "fieldname": "column_break_50",
-   "fieldtype": "Column Break"
+   "fieldname": "additional_discount_percentage",
+   "fieldtype": "Float",
+   "label": "Additional Discount Percentage",
+   "print_hide": 1
   },
   {
-   "fieldname": "column_break_58",
-   "fieldtype": "Column Break"
+   "fieldname": "discount_amount",
+   "fieldtype": "Currency",
+   "label": "Additional Discount Amount",
+   "options": "currency",
+   "print_hide": 1
   },
   {
-   "default": "0",
-   "fieldname": "use_company_roundoff_cost_center",
-   "fieldtype": "Check",
-   "label": "Use Company Default Round Off Cost Center"
+   "collapsible": 1,
+   "fieldname": "sec_tax_breakup",
+   "fieldtype": "Section Break",
+   "label": "Tax Breakup"
   },
   {
-   "default": "0",
-   "fieldname": "use_transaction_date_exchange_rate",
-   "fieldtype": "Check",
-   "label": "Use Transaction Date Exchange Rate",
+   "fieldname": "other_charges_calculation",
+   "fieldtype": "Long Text",
+   "label": "Taxes and Charges Calculation",
+   "no_copy": 1,
+   "oldfieldtype": "HTML",
+   "print_hide": 1,
    "read_only": 1
   },
   {
-   "fieldname": "purchase_invoice_tab",
-   "fieldtype": "Tab Break",
-   "label": "Purchase Invoice"
+   "collapsible": 1,
+   "fieldname": "pricing_rule_details",
+   "fieldtype": "Section Break",
+   "hidden": 1,
+   "label": "Pricing Rules"
   },
   {
-   "fieldname": "quality_check_tab",
-   "fieldtype": "Tab Break",
-   "label": "Quality Check"
-  },
-  {
-   "fieldname": "qc_posting_date",
-   "fieldtype": "Date",
-   "label": "Posting Date"
-  },
-  {
-   "fieldname": "rejected_warehouse",
-   "fieldtype": "Link",
-   "label": "Rejected Warehouse",
-   "options": "Warehouse"
+   "fieldname": "pricing_rules",
+   "fieldtype": "Table",
+   "label": "Pricing Rule Detail",
+   "options": "Pricing Rule Detail",
+   "read_only": 1
   },
   {
    "fieldname": "column_break_pvmo",
    "fieldtype": "Column Break"
   },
   {
-   "fieldname": "qc_status",
-   "fieldtype": "Select",
-   "label": "Status",
-   "options": "\nAccepted\nRejected\nPartially Accepted"
-  },
-  {
-   "fieldname": "inspection_type",
-   "fieldtype": "Select",
-   "label": "Inspection Type",
-   "options": "\nIncoming\nOutgoing\nIn-Process"
-  },
-  {
-   "fieldname": "packaging_section",
-   "fieldtype": "Section Break",
-   "label": "Packaging"
-  },
-  {
-   "fieldname": "freshness_level",
-   "fieldtype": "Float",
-   "label": "Freshness Level (0-5)"
-  },
-  {
-   "fieldname": "addition_description",
-   "fieldtype": "Small Text",
-   "label": "Addition Description"
-  },
-  {
    "fieldname": "column_break_zgiw",
    "fieldtype": "Column Break"
   },
   {
-   "fieldname": "total_weight",
-   "fieldtype": "Float",
-   "label": "Total Weight"
+   "fieldname": "column_break_15",
+   "fieldtype": "Column Break"
   },
   {
-   "fieldname": "section_break_hvqr",
-   "fieldtype": "Section Break"
+   "fieldname": "column_break_nqfo",
+   "fieldtype": "Column Break"
   },
   {
-   "fieldname": "item_details",
-   "fieldtype": "Table",
-   "label": "Item Details",
-   "options": "PM Accepted Items"
+   "fieldname": "column_break_wiwd",
+   "fieldtype": "Column Break"
   },
   {
-   "fieldname": "purchase_order_tab",
-   "fieldtype": "Tab Break",
-   "label": "Purchase Order"
+   "fieldname": "column_break_ndjz",
+   "fieldtype": "Column Break"
   },
   {
-   "default": "0",
-   "fieldname": "update_stock",
-   "fieldtype": "Check",
-   "label": "Update Stock"
+   "fieldname": "column_break_qnsv",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "eval:doc.supplier",
+   "fieldname": "email",
+   "fieldtype": "Data",
+   "label": "Email"
+  },
+  {
+   "depends_on": "eval:doc.supplier",
+   "fieldname": "payment_made",
+   "fieldtype": "Select",
+   "label": "Payment Made",
+   "options": "\nYes\nNo"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Purchase Master",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "depends_on": "eval:doc.payment_made == \"Yes\"",
+   "fieldname": "mode_of_payment",
+   "fieldtype": "Link",
+   "label": "Mode of Payment",
+   "mandatory_depends_on": "eval:doc.payment_made == \"Yes\"",
+   "options": "Mode of Payment"
+  },
+  {
+   "depends_on": "eval:doc.mode_of_payment",
+   "fieldname": "cashbank_account",
+   "fieldtype": "Link",
+   "label": "Cash/Bank Account",
+   "options": "Account",
+   "read_only": 1
   }
  ],
  "hide_toolbar": 1,
  "icon": "fa fa-file-text",
- "idx": 204,
  "is_submittable": 1,
- "links": [],
- "modified": "2024-03-07 15:17:08.315371",
+ "links": [
+  {
+   "link_doctype": "Purchase Invoice",
+   "link_fieldname": "custom_reference_document"
+  }
+ ],
+ "modified": "2024-03-08 14:01:36.950629",
  "modified_by": "Administrator",
  "module": "Ez-Supermarket",
- "name": "Procurement Master",
+ "name": "Purchase Master",
  "naming_rule": "By \"Naming Series\" field",
  "owner": "Administrator",
  "permissions": [
@@ -915,7 +860,7 @@
    "write": 1
   }
  ],
- "search_fields": "posting_date, supplier, bill_no, base_grand_total, outstanding_amount",
+ "search_fields": "posting_date, supplier,base_grand_total, outstanding_amount",
  "show_name_in_global_search": 1,
  "sort_field": "modified",
  "sort_order": "DESC",

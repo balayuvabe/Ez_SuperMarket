@@ -5,5 +5,5 @@
 from frappe.tests.utils import FrappeTestCase
 
 
-class TestQuickPurchase(FrappeTestCase):
+class TestPurchaseMaster(FrappeTestCase):
 	pass

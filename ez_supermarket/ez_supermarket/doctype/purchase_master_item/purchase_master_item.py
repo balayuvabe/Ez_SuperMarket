@@ -5,5 +5,5 @@
 from frappe.model.document import Document
 
 
-class QuickPurchaseItems(Document):
+class PurchaseMasterItem(Document):
 	pass
