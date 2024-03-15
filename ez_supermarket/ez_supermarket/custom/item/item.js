@@ -23,7 +23,7 @@ frappe.ui.form.on("Item", {
       return { filters: { warehouse: doc.custom_default_stall_warehouse } };
     });
   },
-  custom_tax_rate: function (frm) {
+  validate: function (frm) {
     console.log("Validation of Item Form");
 
     frappe.call({

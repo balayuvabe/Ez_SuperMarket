@@ -217,19 +217,9 @@
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Purchase Master",
-   "link_count": 0,
-   "link_to": "Purchase Master",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
   }
  ],
- "modified": "2024-03-09 15:00:55.147428",
+ "modified": "2024-03-11 12:10:05.887383",
  "modified_by": "Administrator",
  "module": "Ez-Supermarket",
  "name": "Supermarket",

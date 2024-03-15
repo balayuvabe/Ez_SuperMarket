@@ -146,6 +146,25 @@ function showItemDialog(frm) {
           },
         },
         {
+          fieldname: "calculate_mrp",
+          label: "Calculate MRP",
+          fieldtype: "Button",
+          click: function () {
+            var buying_price = dialog.get_value("buying_price");
+            var tax_rate = dialog.get_value("tax_rate");
+            var margin = 0.35; // 35%
+
+            // Calculate MRP
+            var mrp =
+              buying_price +
+              buying_price * margin +
+              (buying_price * tax_rate) / 100;
+
+            // Update the MRP field
+            dialog.set_value("mrp", mrp);
+          },
+        },
+        {
           fieldname: "selling_price_wo_taxes",
           label: "Selling Price without Taxes",
           fieldtype: "Currency",
@@ -188,12 +207,7 @@ function showItemDialog(frm) {
       ],
       primary_action: function () {
         var values = dialog.get_values();
-        var mrp = frm.doc.items[currentIndex].custom_mrp;
-        var sellingPriceWithTaxes = values.selling_price_with_taxes || 0;
-        if (sellingPriceWithTaxes > mrp) {
-          frappe.msgprint("Selling price cannot exceed <b>MRP</b>");
-          return;
-        }
+
         if (values.update_mrp) {
           // Update the custom_mrp field in the current item
           frm.doc.items[currentIndex].custom_mrp = values.mrp;
@@ -222,6 +236,7 @@ function showItemDialog(frm) {
           // If yes, update the dialog content again
           dialog.set_values({
             item_code: frm.doc.items[currentIndex].item_code,
+            received_qty: frm.doc.items[currentIndex].qty,
             mrp: frm.doc.items[currentIndex].custom_mrp,
             buying_price: frm.doc.items[currentIndex].rate,
             margin: "",
@@ -342,6 +357,9 @@ frappe.ui.form.on("Purchase Receipt Item", {
   item_code: function (frm, cdt, cdn) {
     var child = locals[cdt][cdn];
     var warehouse = child.set_warehouse || child.warehouse; // Use set_warehouse from parent if provided, otherwise use warehouse from child table
+    // var custom_mrp = child.custom_mrp; // Assuming custom_mrp is defined in the child table
+
+    console.log("Fetching item details for:", child.item_code);
 
     frappe.call({
       method:
@@ -350,10 +368,13 @@ frappe.ui.form.on("Purchase Receipt Item", {
         item_code: child.item_code,
         set_warehouse: warehouse,
         warehouse: warehouse,
+        // custom_mrp: custom_mrp,
       },
       callback: function (r) {
         if (r.message) {
+          console.log("Received item details:", r.message);
           frappe.model.set_value(cdt, cdn, "warehouse", r.message.warehouse);
+          // frappe.model.set_value(cdt, cdn, "custom_mrp", r.message.custom_mrp);
           frappe.model.set_value(
             cdt,
             cdn,

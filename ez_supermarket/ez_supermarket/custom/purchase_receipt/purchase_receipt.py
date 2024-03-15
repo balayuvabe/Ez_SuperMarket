@@ -96,13 +96,13 @@ def fetch_item_details(item_code, set_warehouse=None, warehouse=None):
             return {
                 "warehouse": warehouse,
                 "item_location": item.custom_default_store_location,
-                "custom_mrp": item.custom_mrp
+                # "custom_mrp": item.custom_mrp
             }
         elif item.custom_default_stall_warehouse == warehouse:
             return {
                 "warehouse": warehouse,
                 "item_location": item.custom_default_stall_location,
-                "custom_mrp": item.custom_mrp
+                # "custom_mrp": item.custom_mrp
             }
 
     return {}
