@@ -73,6 +73,83 @@ frappe.ui.form.on("Purchase Master", {
         fetchSupplierItems(frm);
       }
     );
+    frm.add_custom_button("Calculate Purchase Qty", function () {
+      // Create a new dialog
+      var d = new frappe.ui.Dialog({
+        title: "Enter details",
+        fields: [
+          {
+            label: "Number of Months",
+            fieldname: "months",
+            fieldtype: "Int",
+            reqd: 1,
+            change: function () {
+              // Perform action when the number of months changes
+              var numberOfMonths = this.value;
+              // Calculate total purchase quantity for each item
+              var items = frm.doc.items;
+              for (var i = 0; i < items.length; i++) {
+                var item = items[i];
+                var totalPurchaseQty = calculateTotalPurchaseQty(
+                  item.item_code,
+                  numberOfMonths
+                );
+                // Update the pur_qty field for the item
+                d.fields_dict.items.df.data[i].pur_qty = totalPurchaseQty;
+              }
+              d.refresh_field("items");
+            },
+          },
+
+          {
+            label: "Items",
+            fieldname: "items",
+            fieldtype: "Table",
+            fields: [
+              {
+                label: "Item Code",
+                fieldname: "item_code",
+                fieldtype: "Data",
+                read_only: 1,
+                in_list_view: 1,
+              },
+              {
+                label: "Qty",
+                fieldname: "qty",
+                fieldtype: "Float",
+                read_only: 1,
+                in_list_view: 1,
+              },
+              {
+                label: "Total Purchase Qty",
+                fieldname: "pur_qty",
+                fieldtype: "Float",
+                read_only: 1,
+                in_list_view: 1,
+              },
+              {
+                label: "Suggested Qty",
+                fieldname: "suggested_qty",
+                fieldtype: "Float",
+                read_only: 1,
+                in_list_view: 1,
+              },
+            ],
+            in_place_edit: true,
+            data: frm.doc.items.map((item) => ({
+              item_code: item.item_code,
+              qty: item.qty,
+              pur_qty: 0, // Initialize pur_qty to 0
+              suggested_qty: 0,
+            })),
+          },
+        ],
+        primary_action_label: "Calculate",
+        primary_action: function () {},
+      });
+
+      d.show();
+    });
   },
   //   frm.add_custom_button("Calculate Purchase Qty", function () {
   //     const months = prompt("Based on how many months?");
@@ -161,7 +238,31 @@ frappe.ui.form.on("Purchase Master", {
     }
   },
 });
+function calculateTotalPurchaseQty(item_code, numberOfMonths) {
+  frappe.call({
+    method:
+      "ez_supermarket.ez_supermarket.doctype.purchase_master.purchase_master.get_total_purchase_qty",
+    args: {
+      item_code: item_code,
+      number_of_months: numberOfMonths,
+    },
+    callback: function (r) {
+      if (r.message) {
+        var totalQty = r.message.total_qty;
+        var suggestedQty = totalQty / numberOfMonths;
 
+        // Update the pur_qty and suggested_qty fields
+        var itemIndex = frm.doc.items.findIndex(
+          (item) => item.item_code === item_code
+        );
+        if (itemIndex !== -1) {
+          d.fields_dict.items.df.data[itemIndex].pur_qty = totalQty;
+          d.fields_dict.items.df.data[itemIndex].suggested_qty = suggestedQty;
+        }
+      }
+    },
+  });
+}
 function fetchSupplierItems(frm) {
   // Get supplier
   var supplier = frm.doc.supplier;

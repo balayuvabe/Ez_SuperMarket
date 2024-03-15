@@ -3,7 +3,7 @@
 
 
 import frappe
-import frappe
+from frappe import db
 from datetime import datetime, timedelta
 from frappe.utils import flt
 from frappe import _
@@ -247,14 +247,14 @@ class PurchaseMaster(BuyingController):
 def fetch_supplier_items(supplier):
     items = []
     
-    item_defaults = frappe.get_all("Item Default", 
+    item_supplier = frappe.get_all("Item Supplier", 
         filters={
-            "default_supplier": supplier
+            "supplier": supplier
         },
         fields=["parent"]
     )
     
-    for row in item_defaults:
+    for row in item_supplier:
         item_code = row.parent
         item = frappe.get_doc("Item", item_code)
         
@@ -299,7 +299,7 @@ def fetch_supplier_items(supplier):
                 })
 
     return items
-
+@frappe.whitelist()																	
 def get_qty_and_price(item_code, start_date, end_date):
     # Query Sales Invoices for the given item within the given date range
     sales_qty = frappe.db.sql("""
@@ -515,6 +515,22 @@ def create_purchase_invoice(purchase_master):
 @frappe.whitelist()
 def on_submit(doc, method):
   create_purchase_invoice(doc.name)
+  
+@frappe.whitelist()
+def get_total_purchase_qty(item_code, number_of_months):
+    result = db.sql("""
+        SELECT SUM(qty) AS total_qty
+		FROM `tabPurchase Invoice Item`
+		WHERE item_code = %s
+		AND posting_date >= DATE_SUB(CURDATE(), INTERVAL %s MONTH)
+
+    """, (item_code, number_of_months))
+
+    if result:
+        return {"total_qty": result[0][0] or 0}
+    else:
+        return {"total_qty": 0}
+
 	# def onload(self):
 	# 	super(PurchaseMaster, self).onload()
 	# 	supplier_tds = frappe.db.get_value("Supplier", self.supplier, "tax_withholding_category")

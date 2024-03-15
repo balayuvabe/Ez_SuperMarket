@@ -11,14 +11,14 @@ from frappe import _
 def fetch_supplier_items(supplier):
     items = []
     
-    item_defaults = frappe.get_all("Item Default", 
+    item_supplier = frappe.get_all("Item Supplier", 
         filters={
-            "default_supplier": supplier
+            "supplier": supplier
         },
         fields=["parent"]
     )
     
-    for row in item_defaults:
+    for row in item_supplier:
         item_code = row.parent
         item = frappe.get_doc("Item", item_code)
         
