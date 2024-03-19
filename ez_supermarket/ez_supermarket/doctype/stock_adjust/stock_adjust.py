@@ -18,6 +18,7 @@ def create_stock_reconciliation(stock_adjust):
     stock_reconciliation.posting_time = 1
     stock_reconciliation.posting_date = stock_adjust_doc.posting_date
     stock_reconciliation.posting_time = stock_adjust_doc.posting_time
+    stock_reconciliation.custom_reason = stock_adjust_doc.reason
     # stock_reconciliation.expense_account = "Stock Adjustment - PTPS"
     stock_reconciliation.purpose = "Stock Reconciliation"
     stock_reconciliation.custom_document_type = "Stock Adjust"
@@ -26,7 +27,7 @@ def create_stock_reconciliation(stock_adjust):
     for item in stock_adjust_doc.items:
         stock_reconciliation.append("items", {
             "item_code": item.item_code,
-            "qty": item.qty,
+            "qty": item.actual_qty,
             "valuation_rate": item.valuation_rate,
             "warehouse": item.t_warehouse,
             # "batch_no": item.batch_no,
