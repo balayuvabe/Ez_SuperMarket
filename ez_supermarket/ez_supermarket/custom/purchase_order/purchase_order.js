@@ -7,7 +7,7 @@ frappe.ui.form.on("Purchase Order", {
       method:
         "ez_supermarket.ez_supermarket.custom.purchase_order.purchase_order.check_supplier_bill_no",
       args: {
-        // supplier: frm.doc.supplier,
+        supplier: frm.doc.supplier,
         custom_suppliers_bill_no: frm.doc.custom_suppliers_bill_no,
       },
       callback: function (r) {
