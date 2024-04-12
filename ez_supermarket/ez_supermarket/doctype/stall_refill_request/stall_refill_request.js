@@ -71,7 +71,8 @@ frappe.ui.form.on("Stall Refill Request", {
 
         // Set the fields of the document as required
         doc.stock_entry_type = "Item Transfer to Stall";
-        doc.posting_date = frm.doc.posting_date;
+        (doc.naming_series = "MAT-STE-.YYYY.-"),
+          (doc.posting_date = frm.doc.posting_date);
         doc.posting_time = frm.doc.posting_time;
         doc.custom_document_type = "Stall Refill Request";
         doc.custom_reference_document = frm.doc.name;
@@ -114,11 +115,14 @@ frappe.ui.form.on("Stall Refill Request", {
             for (var i = 0; i < r.message.length; i++) {
               var d = frm.add_child("stall_request_details");
               d.item_code = r.message[i].item_code;
+              d.item_name = r.message[i].item_name;
+              d.uom = r.message[i].stock_uom;
               d.qty_sold = r.message[i].qty_sold;
               d.stall_location = r.message[i].stall_location;
               d.store_location = r.message[i].store_location;
               d.max_qty = r.message[i].max_qty;
-              d.store_warehouse = r.message[i].warehouse;
+              d.store_warehouse = r.message[i].store_warehouse;
+              d.stall_warehouse = r.message[i].stall_warehouse;
               d.refill_qty = r.message[i].max_qty - r.message[i].qty_sold;
             }
             frm.refresh_field("stall_request_details");

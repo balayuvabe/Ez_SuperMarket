@@ -68,6 +68,10 @@ frappe.ui.form.on("Stock Adjust Details", {
   t_warehouse: function (frm, cdt, cdn) {
     updateAvailableQty(frm, cdt, cdn);
   },
+  // qty: function (frm, cdt, cdn) {
+  //   var value = frm.doc.qty;
+  //   frm.set_value("actual_qty", value);
+  // },
 });
 
 function updateAvailableQty(frm, cdt, cdn) {

@@ -20,7 +20,7 @@ def set_timestamps(doc_str):
     existing_doc = frappe.get_value(
         "Stall Refill Request",
         {
-            "posting_date": doc.posting_date,
+            # "posting_date": doc.posting_date,
             "docstatus": 1,
         },
         ["name", "timestamp"],
@@ -37,41 +37,37 @@ def set_timestamps(doc_str):
         })
 
         return updated_doc
-    else:
-        doc = frappe.get_doc(doc)
-        doc.timestamp = now
-        doc.last_fetch_timestamp = f"{doc.posting_date} 00:00:00"
+    # else:
+    #     doc = frappe.get_doc(doc)
+    #     doc.timestamp = now
+    #     doc.last_fetch_timestamp = f"{doc.posting_date} 00:00:00"
 
-        return doc
+    #    return doc
+
+
 
 
 @frappe.whitelist()
-def fetch_items_sold(posting_date, timestamp, last_fetch_ts=None):
-    data = []  # Define as list
+def fetch_items_sold(timestamp, last_fetch_ts=None):
+    data = [] # Define as list
 
     if last_fetch_ts:
         invoices = frappe.db.sql("""
-          SELECT 
-            sii.item_code, sii.qty
-          FROM `tabSales Invoice Item` sii
-          INNER JOIN `tabSales Invoice` si ON sii.parent = si.name
-          WHERE
-            si.posting_date = %s
+            SELECT sii.item_code, sii.qty
+            FROM `tabSales Invoice Item` sii
+            INNER JOIN `tabSales Invoice` si ON sii.parent = si.name
+            WHERE CONCAT(si.posting_date, ' ', si.posting_time) BETWEEN %s AND %s
             AND si.docstatus = 1
-            AND si.posting_time BETWEEN %s AND %s
-        """, (posting_date, last_fetch_ts, timestamp), as_dict=1)
+        """, (last_fetch_ts, timestamp), as_dict=1)
     else:
-        start_time = posting_date + " 00:00:00"
+        start_time = frappe.utils.nowdate() + " 00:00:00"
         invoices = frappe.db.sql("""
-          SELECT 
-            sii.item_code, sii.qty  
-          FROM `tabSales Invoice Item` sii
-          INNER JOIN `tabSales Invoice` si ON sii.parent = si.name
-          WHERE
-            si.posting_date = %s
+            SELECT sii.item_code, sii.qty
+            FROM `tabSales Invoice Item` sii
+            INNER JOIN `tabSales Invoice` si ON sii.parent = si.name
+            WHERE CONCAT(si.posting_date, ' ', si.posting_time) BETWEEN %s AND %s
             AND si.docstatus = 1
-            AND si.posting_time BETWEEN %s AND %s
-        """, (posting_date, start_time, timestamp), as_dict=1)
+        """, (start_time, timestamp), as_dict=1)
 
     items_sold = {}
 
@@ -84,15 +80,19 @@ def fetch_items_sold(posting_date, timestamp, last_fetch_ts=None):
     for item_code, item_data in items_sold.items():
         item = frappe.get_doc("Item", item_code)
         item_data["item_code"] = item_code
+        item_data["stock_uom"] = item.stock_uom
+        item_data["item_name"] = item.item_name
         item_data["qty_sold"] = items_sold[item_code]["qty"]
         item_data["stall_location"] = item.custom_default_stall_location
         item_data["store_location"] = item.custom_default_store_location
         item_data["max_qty"] = item.custom_max_qty
-        item_data["warehouse"] = item.custom_default_store_warehouse
+        item_data["store_warehouse"] = item.custom_default_store_warehouse
+        item_data["stall_warehouse"] = item.custom_default_stall_warehouse
 
         data.append(item_data)  # Append to list
 
     return data
+
 
 # @frappe.whitelist()
 # def create_item_transfer_to_stall(stall_request):
