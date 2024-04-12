@@ -27,7 +27,7 @@ def create_stock_reconciliation(stock_adjust):
     for item in stock_adjust_doc.items:
         stock_reconciliation.append("items", {
             "item_code": item.item_code,
-            "qty": item.actual_qty,
+            "qty": item.qty,
             "valuation_rate": item.valuation_rate,
             "warehouse": item.t_warehouse,
             # "batch_no": item.batch_no,
